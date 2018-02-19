@@ -4,8 +4,8 @@ import java.util.Vector;
 
 public class Main {
 	private static Scanner in = new Scanner(System.in);
-	private static Vector<Integer> array = new Vector<Integer>();
-	private static int arraySize;
+	public static Vector<Integer> array = new Vector<Integer>();
+	public static int arraySize;
 	private static Random random = new Random(System.currentTimeMillis());
 	
 	public static void main(String[] args) {
@@ -14,16 +14,16 @@ public class Main {
 		showMenu();
 		int selectedOption = in.nextInt();
 		functionSelection(selectedOption);
-		searchPrimeNumbers();
+		System.out.println(searchPrimeNumbers());
 	}
 	
-	private static void showMenu() {
+	public static void showMenu() {
 		System.out.println("1)Fill the array yourself");
 		System.out.println("2)Fill the array randomly");
 		System.out.println("3)Fill the array sequentially");
 	}
 	
-	private static void functionSelection(int selectedOption) {
+	public static void functionSelection(int selectedOption) {
 		switch(selectedOption) {
 		case 1: fillingArrayManually();
 			break;
@@ -34,7 +34,8 @@ public class Main {
 		}
 	}
 	
-	private static void fillingArrayManually() {
+	public static void fillingArrayManually() {
+		array.removeAllElements();
 		for(int i = 0; i < arraySize; i++) {
 			System.out.print("Element ¹" + i + " = ");
 			Integer tempInt = new Integer(in.nextInt());
@@ -42,28 +43,33 @@ public class Main {
 		}
 	}
 	
-	private static void fillingArrayRandomly() {
+	public static void fillingArrayRandomly() {
+		array.removeAllElements();
 		for(int i = 0; i < arraySize; i++) {
 			Integer tempInt = new Integer(random.nextInt(arraySize));
 			array.addElement(tempInt);
 		}
 	}
 	
-	private static void fillingArraySequentially() {
+	public static void fillingArraySequentially() {
+		array.removeAllElements();
 		for(int i = 0; i < arraySize; i++) {
 			array.addElement(new Integer(i));
 		}
 	}
 	
-	private static void searchPrimeNumbers() {
+	public static String searchPrimeNumbers() {
+		String result = new String("");
 		for (int i = 0; i< array.size(); i++){
 			if (primeNumber(array.elementAt(i)) == true){
-				System.out.print(i + " ");
+				result += i;
+            	result += " ";
 	        }
 	    }
+		return result;
 	}
 	
-	private static boolean primeNumber(int number) {
+	public static boolean primeNumber(int number) {
 		if(number == 2) return true;
         for (int i = 2; i <= number; i++) {
             if (number % i == 0) {
