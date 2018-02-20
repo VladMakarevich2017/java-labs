@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBox;
@@ -31,6 +33,28 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.JList;
+import javax.swing.JToolBar;
+import javax.swing.JDesktopPane;
+import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.JScrollBar;
+import javax.swing.JSeparator;
+import javax.swing.JTree;
+import javax.swing.JTextArea;
+import javax.swing.JFormattedTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JToggleButton;
+import javax.swing.JEditorPane;
 
 public class MenuFrame extends JFrame {
 
@@ -56,8 +80,9 @@ public class MenuFrame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param <E>
 	 */
-	public MenuFrame() {
+	public <E> MenuFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -136,5 +161,33 @@ public class MenuFrame extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Видео");
 		mnNewMenu_1.add(mntmNewMenuItem_7);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(5, 94, 368, 614);
+		contentPane.add(tabbedPane);
+		
+		DefaultListModel listModel = new DefaultListModel(); //Using "add" and "remove" to management the list
+		JList<? extends E> list = new JList(listModel);
+		tabbedPane.addTab("Документы", null, list, null);
+		
+		DefaultListModel listModel_1 = new DefaultListModel();
+		JList<? extends E> list_1 = new JList(listModel_1);
+		tabbedPane.addTab("Книги", null, list_1, null);
+		
+		DefaultListModel listModel_2 = new DefaultListModel();
+		JList<? extends E> list_2 = new JList(listModel_2);
+		tabbedPane.addTab("Аудио", null, list_2, null);
+		
+		DefaultListModel listModel_3 = new DefaultListModel();
+		JList<? extends E> list_3 = new JList(listModel_3);
+		tabbedPane.addTab("Видео", null, list_3, null);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_4.setBounds(385, 116, 611, 592);
+		contentPane.add(scrollPane_4);
+		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
 }
