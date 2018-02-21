@@ -10,6 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class LoginFrame extends JFrame {
@@ -61,9 +63,27 @@ public class LoginFrame extends JFrame {
 		passwordField = new JPasswordField();
 		tuningPasswordField();				
 		entryButton = new JButton("Войти");
+		entryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		tuningEntryButton();
 		guestEntryButton = new JButton("Войти как гость");
+		guestEntryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		tuningGuestEntryButton();
+		registerButton = new JButton("Регистрация");
+		tuningRegisterButton();
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		
 	}
 	
@@ -117,8 +137,9 @@ public class LoginFrame extends JFrame {
 		guestEntryButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		guestEntryButton.setBounds(592, 13, 178, 37);
 		contentPane.add(guestEntryButton);
-		
-		registerButton = new JButton("Регистрация");
+	}
+	
+	private void tuningRegisterButton() {
 		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		registerButton.setBounds(12, 13, 178, 37);
 		contentPane.add(registerButton);

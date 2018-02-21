@@ -22,6 +22,7 @@ public class AdminLoginFrame extends JFrame {
 					AdminLoginFrame frame = new AdminLoginFrame();
 					frame.setVisible(true);
 					frame.setTitle("Добро пожаловать, Господин!!!");
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

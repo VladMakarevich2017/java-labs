@@ -31,6 +31,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class MenuFrame extends JFrame {
@@ -105,12 +107,24 @@ public class MenuFrame extends JFrame {
 		mainMenuBar.add(filesManagementMenu);
 		
 		menuItemForAdding = new JMenuItem("Добавить");
+		menuItemForAdding.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		filesManagementMenu.add(menuItemForAdding);
 		
 		menuItemForOpenning = new JMenuItem("Открыть");
+		menuItemForOpenning.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		filesManagementMenu.add(menuItemForOpenning);
 		
 		menuItemForSaving = new JMenuItem("Сохранить");
+		menuItemForSaving.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		filesManagementMenu.add(menuItemForSaving);
 		
 		filterMenu = new JMenu("Фильтры");
@@ -118,9 +132,17 @@ public class MenuFrame extends JFrame {
 		mainMenuBar.add(filterMenu);
 		
 		filterSettingMenuItem = new JMenuItem("Настроить фильтр");
+		filterSettingMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		filterMenu.add(filterSettingMenuItem);
 		
 		filterSwitchMenuItem = new JCheckBox("Включить фильтр");
+		filterSwitchMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		filterMenu.add(filterSwitchMenuItem);
 		contentPane.add(mainMenuBar);
 		
@@ -135,6 +157,10 @@ public class MenuFrame extends JFrame {
 		mainMenuBar.add(rigidArea_3);
 		
 		exitButton = new JButton("Выход");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		mainMenuBar.add(exitButton);
 		
@@ -143,25 +169,35 @@ public class MenuFrame extends JFrame {
 		contentPane.add(informationManagementMenu);
 		
 		menuAddingInformation = new JMenu("Добавить");
-		menuAddingInformation.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		menuAddingInformation.setBorderPainted(true);
-		menuAddingInformation.setBackground(Color.DARK_GRAY);
-		menuAddingInformation.setHorizontalTextPosition(SwingConstants.CENTER);
-		menuAddingInformation.setHorizontalAlignment(SwingConstants.CENTER);
-		menuAddingInformation.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		menuAddingInformation.setPreferredSize(new Dimension(200, 24));
+		tuningMenuAddingInformation();
 		informationManagementMenu.add(menuAddingInformation);
 		
 		documentsMenuItem = new JMenuItem("Документы");
+		documentsMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuAddingInformation.add(documentsMenuItem);
 		
 		booksMenuItem = new JMenuItem("Книги");
+		booksMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuAddingInformation.add(booksMenuItem);
 		
 		soundsMenuItem = new JMenuItem("Аудио");
+		soundsMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuAddingInformation.add(soundsMenuItem);
 		
 		videoMenuItem = new JMenuItem("Видео");
+		videoMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuAddingInformation.add(videoMenuItem);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(483, 20));
@@ -175,6 +211,11 @@ public class MenuFrame extends JFrame {
 		informationManagementMenu.add(rigidArea_1);
 		
 		textSearchField = new JTextField();
+		textSearchField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		textSearchField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		informationManagementMenu.add(textSearchField);
 		textSearchField.setBorder(UIManager.getBorder("MenuBar.border"));
@@ -215,6 +256,16 @@ public class MenuFrame extends JFrame {
 		informationArea.setCaretPosition(informationArea.getLineStartOffset(informationArea.getLineCount() - 1));
 		scrollPane.setViewportView(informationArea);
 		
+	}
+	
+	private void tuningMenuAddingInformation() {
+		menuAddingInformation.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		menuAddingInformation.setBorderPainted(true);
+		menuAddingInformation.setBackground(Color.DARK_GRAY);
+		menuAddingInformation.setHorizontalTextPosition(SwingConstants.CENTER);
+		menuAddingInformation.setHorizontalAlignment(SwingConstants.CENTER);
+		menuAddingInformation.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuAddingInformation.setPreferredSize(new Dimension(200, 24));
 	}
 	
 	private void tuningDocumentsList() {
