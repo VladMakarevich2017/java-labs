@@ -1,30 +1,28 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JEditorPane;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("serial")
 public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField loginField;
 	private JPasswordField passwordField;
+	private JPanel inputPanel;
+	private JLabel loginLabel;
+	private JLabel passwordLabel;
+	private JButton entryButton;
+	private JButton guestEntryButton;
+	private JButton registerButton;
 
 	/**
 	 * Launch the application.
@@ -51,47 +49,78 @@ public class LoginFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
+		tuningContentPane();		
+		inputPanel = new JPanel();
+		tuningInputPanel();				
+		loginLabel = new JLabel("Логин:");
+		tuningLoginLabel();		
+		loginField = new JTextField();
+		tuningLoginField();		
+		passwordLabel = new JLabel("Пароль:");
+		tuningPasswordLabel();				
+		passwordField = new JPasswordField();
+		tuningPasswordField();				
+		entryButton = new JButton("Войти");
+		tuningEntryButton();
+		guestEntryButton = new JButton("Войти как гость");
+		tuningGuestEntryButton();
+		
+	}
+	
+	private void tuningContentPane() {
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(135, 206, 250));
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(192, 107, 397, 280);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel label = new JLabel("\u041B\u043E\u0433\u0438\u043D:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label.setBounds(105, 46, 186, 30);
-		panel.add(label);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(105, 75, 186, 30);
-		textField.setDocument(new JTextFieldLimit(20));
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel label_2 = new JLabel("\u041F\u0430\u0440\u043E\u043B\u044C:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		label_2.setBounds(105, 110, 186, 30);
-		panel.add(label_2);
-		
-		passwordField = new JPasswordField();
+	}
+	
+	private void tuningInputPanel() {
+		inputPanel.setBackground(new Color(135, 206, 250));
+		inputPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		inputPanel.setBounds(192, 107, 397, 280);
+		contentPane.add(inputPanel);
+		inputPanel.setLayout(null);
+	}
+	
+	private void tuningLoginLabel() {
+		loginLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		loginLabel.setBounds(105, 46, 186, 30);
+		inputPanel.add(loginLabel);
+	}
+	
+	private void tuningLoginField() {
+		loginField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		loginField.setBounds(105, 75, 186, 30);
+		loginField.setDocument(new JTextFieldLimit(20));
+		inputPanel.add(loginField);
+		loginField.setColumns(10);
+	}
+	
+	private void tuningPasswordLabel() {
+		passwordLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordLabel.setBounds(105, 110, 186, 30);
+		inputPanel.add(passwordLabel);
+	}
+	
+	private void tuningPasswordField() {
 		passwordField.setBounds(105, 140, 186, 30);
 		passwordField.setDocument(new JTextFieldLimit(30));
-		panel.add(passwordField);
+		inputPanel.add(passwordField);
+	}
+	
+	private void tuningEntryButton() {
+		entryButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		entryButton.setBounds(105, 197, 186, 37);
+		inputPanel.add(entryButton);
+	}
+	
+	private void tuningGuestEntryButton() {
+		guestEntryButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		guestEntryButton.setBounds(592, 13, 178, 37);
+		contentPane.add(guestEntryButton);
 		
-		JButton button = new JButton("\u0412\u043E\u0439\u0442\u0438");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		button.setBounds(105, 197, 186, 37);
-		panel.add(button);
-		
-		JButton btnNewButton = new JButton("Войти как гость");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(592, 13, 178, 37);
-		contentPane.add(btnNewButton);
+		registerButton = new JButton("Регистрация");
+		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		registerButton.setBounds(12, 13, 178, 37);
+		contentPane.add(registerButton);
 	}
 }

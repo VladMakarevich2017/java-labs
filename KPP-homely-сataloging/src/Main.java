@@ -11,6 +11,9 @@ public class Main {
 		MenuFrame menu = new MenuFrame();
 		menu.run();
 		LoginFrame login = new LoginFrame();
+		login.run();
+		AdminLoginFrame admin = new AdminLoginFrame();
+		admin.run();
 	}
 
 }

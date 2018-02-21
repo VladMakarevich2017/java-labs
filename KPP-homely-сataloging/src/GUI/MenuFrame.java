@@ -1,67 +1,71 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.Box;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBox;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Rectangle;
 import java.awt.Dimension;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import java.awt.Component;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
 import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.BadLocationException;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.JList;
-import javax.swing.JToolBar;
-import javax.swing.JDesktopPane;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import javax.swing.JScrollBar;
-import javax.swing.JSeparator;
-import javax.swing.JTree;
 import javax.swing.JTextArea;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JToggleButton;
-import javax.swing.JEditorPane;
-import javax.swing.DropMode;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class MenuFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textSearchField;
+	private JMenuBar mainMenuBar;
+	private JMenu filesManagementMenu;
+	private JMenuItem menuItemForAdding;
+	private JMenuItem menuItemForOpenning;
+	private JMenuItem menuItemForSaving;
+	private JMenu filterMenu;
+	private JMenuItem filterSettingMenuItem;
+	private JCheckBox filterSwitchMenuItem;
+	private JMenuBar informationManagementMenu;
+	private JMenu menuAddingInformation;
+	private JMenuItem documentsMenuItem;
+	private JMenuItem booksMenuItem;
+	private JMenuItem soundsMenuItem;
+	private JMenuItem videoMenuItem;
+	private JTabbedPane tabbedPane;
+	private DefaultListModel<String> documentsListModel;
+	private JList<String> documentsList;
+	private DefaultListModel<String> booksListModel;
+	private JList<String> booksList;
+	private DefaultListModel<String> soudsListModel;
+	private JList<String> soudsList;
+	private DefaultListModel<String> videoListModel;
+	private JList<String> videoList;
+	private JScrollPane scrollPane;
+	private JTextArea informationArea;
+	private JLabel searchLabel;
+	private JButton exitButton;
+	private JLabel loginLabel;
+	private Component rigidArea_3;
 
 	/**
 	 * Launch the application.
@@ -83,7 +87,6 @@ public class MenuFrame extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param <E>
 	 * @throws BadLocationException 
 	 */
 	public MenuFrame() throws BadLocationException {
@@ -94,161 +97,191 @@ public class MenuFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(5, 5, 996, 26);
+		mainMenuBar = new JMenuBar();
+		mainMenuBar.setBounds(5, 5, 996, 26);
 		
-		JMenu mnNewMenu = new JMenu("Файл");
-		mnNewMenu.setPreferredSize(new Dimension(70, 24));
-		menuBar.add(mnNewMenu);
+		filesManagementMenu = new JMenu("Файл");
+		filesManagementMenu.setPreferredSize(new Dimension(70, 24));
+		mainMenuBar.add(filesManagementMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Добавить");
-		mnNewMenu.add(mntmNewMenuItem);
+		menuItemForAdding = new JMenuItem("Добавить");
+		filesManagementMenu.add(menuItemForAdding);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Открыть");
-		mnNewMenu.add(mntmNewMenuItem_1);
+		menuItemForOpenning = new JMenuItem("Открыть");
+		filesManagementMenu.add(menuItemForOpenning);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Сохранить");
-		mnNewMenu.add(mntmNewMenuItem_2);
+		menuItemForSaving = new JMenuItem("Сохранить");
+		filesManagementMenu.add(menuItemForSaving);
 		
-		JMenu menu = new JMenu("Фильтры");
-		menu.setPreferredSize(new Dimension(70, 24));
-		menuBar.add(menu);
+		filterMenu = new JMenu("Фильтры");
+		filterMenu.setPreferredSize(new Dimension(70, 24));
+		mainMenuBar.add(filterMenu);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Настроить фильтр");
-		menu.add(mntmNewMenuItem_3);
+		filterSettingMenuItem = new JMenuItem("Настроить фильтр");
+		filterMenu.add(filterSettingMenuItem);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Включить фильтр");
-		menu.add(chckbxNewCheckBox);
+		filterSwitchMenuItem = new JCheckBox("Включить фильтр");
+		filterMenu.add(filterSwitchMenuItem);
+		contentPane.add(mainMenuBar);
 		
-		Component rigidArea = Box.createRigidArea(new Dimension(553, 20));
-		menuBar.add(rigidArea);
+		Component rigidArea_2 = Box.createRigidArea(new Dimension(804, 20));
+		mainMenuBar.add(rigidArea_2);
 		
-		JTextPane txtpnAsd = new JTextPane();
-		txtpnAsd.setEditable(false);
-		txtpnAsd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtpnAsd.setBackground(SystemColor.menu);
-		txtpnAsd.setBorder(UIManager.getBorder("MenuBar.border"));
-		txtpnAsd.setMaximumSize(new Dimension(50, 50));
-		txtpnAsd.setPreferredSize(new Dimension(0, 22));
-		txtpnAsd.setText("Поиск:");
-		menuBar.add(txtpnAsd);
+		loginLabel = new JLabel("");
+		loginLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		mainMenuBar.add(loginLabel);
 		
-		textField = new JTextField();
-		textField.setBorder(UIManager.getBorder("MenuBar.border"));
-		textField.setMaximumSize(new Dimension(250, 50));
-		menuBar.add(textField);
-		textField.setColumns(10);
-		contentPane.add(menuBar);
+		rigidArea_3 = Box.createRigidArea(new Dimension(-26, 20));
+		mainMenuBar.add(rigidArea_3);
 		
-		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(5, 33, 991, 48);
-		contentPane.add(menuBar_1);
+		exitButton = new JButton("Выход");
+		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		mainMenuBar.add(exitButton);
 		
-		JMenu mnNewMenu_1 = new JMenu("Добавить");
-		mnNewMenu_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		mnNewMenu_1.setBorderPainted(true);
-		mnNewMenu_1.setBackground(Color.DARK_GRAY);
-		mnNewMenu_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		mnNewMenu_1.setHorizontalAlignment(SwingConstants.CENTER);
-		mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnNewMenu_1.setPreferredSize(new Dimension(200, 24));
-		menuBar_1.add(mnNewMenu_1);
+		informationManagementMenu = new JMenuBar();
+		informationManagementMenu.setBounds(5, 33, 991, 48);
+		contentPane.add(informationManagementMenu);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Документы");
-		mnNewMenu_1.add(mntmNewMenuItem_4);
+		menuAddingInformation = new JMenu("Добавить");
+		menuAddingInformation.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		menuAddingInformation.setBorderPainted(true);
+		menuAddingInformation.setBackground(Color.DARK_GRAY);
+		menuAddingInformation.setHorizontalTextPosition(SwingConstants.CENTER);
+		menuAddingInformation.setHorizontalAlignment(SwingConstants.CENTER);
+		menuAddingInformation.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuAddingInformation.setPreferredSize(new Dimension(200, 24));
+		informationManagementMenu.add(menuAddingInformation);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Книги");
-		mnNewMenu_1.add(mntmNewMenuItem_5);
+		documentsMenuItem = new JMenuItem("Документы");
+		menuAddingInformation.add(documentsMenuItem);
 		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Аудио");
-		mnNewMenu_1.add(mntmNewMenuItem_6);
+		booksMenuItem = new JMenuItem("Книги");
+		menuAddingInformation.add(booksMenuItem);
 		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Видео");
-		mnNewMenu_1.add(mntmNewMenuItem_7);
+		soundsMenuItem = new JMenuItem("Аудио");
+		menuAddingInformation.add(soundsMenuItem);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		videoMenuItem = new JMenuItem("Видео");
+		menuAddingInformation.add(videoMenuItem);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(483, 20));
+		informationManagementMenu.add(rigidArea);
+		
+		searchLabel = new JLabel("Поиск:");
+		searchLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		informationManagementMenu.add(searchLabel);
+		
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(6, 20));
+		informationManagementMenu.add(rigidArea_1);
+		
+		textSearchField = new JTextField();
+		textSearchField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		informationManagementMenu.add(textSearchField);
+		textSearchField.setBorder(UIManager.getBorder("MenuBar.border"));
+		textSearchField.setMaximumSize(new Dimension(250, 50));
+		textSearchField.setColumns(10);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(5, 94, 368, 614);
 		contentPane.add(tabbedPane);
 		
-		DefaultListModel listModel = new DefaultListModel(); //Using "add" and "remove" to management the list
-		listModel.addElement("Test Document Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		listModel.addElement("Test Document Element №2");
-		JList<String> list = new JList(listModel);
-		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.addTab("Документы", null, list, null);
-		list.setModel(listModel);
-		list.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent event) {
-		        JList list = (JList)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            int index = list.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+		documentsListModel = new DefaultListModel<String>(); 
+		documentsList = new JList<String>(documentsListModel);
+		tuningDocumentsList();
 		
-		DefaultListModel listModel_1 = new DefaultListModel(); //Using "add" and "remove" to management the list
-		listModel_1.addElement("Test Book Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		listModel_1.addElement("Test Book Element №2");
-		JList<String> list_1 = new JList(listModel_1);
-		list_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.addTab("Книги", null, list_1, null);
-		list_1.setModel(listModel_1);
-		list_1.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent event) {
-		        JList list_1 = (JList)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            int index = list_1.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+		booksListModel = new DefaultListModel<String>(); 
+		booksList = new JList<String>(booksListModel);
+		tuningBooksList();
 		
-		DefaultListModel listModel_2 = new DefaultListModel(); //Using "add" and "remove" to management the list
-		listModel_2.addElement("Test Sound Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		listModel_2.addElement("Test Sound Element №2");
-		JList<String> list_2 = new JList(listModel_2);
-		list_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.addTab("Аудио", null, list_2, null);
-		list_2.setModel(listModel_2);
-		list_2.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent event) {
-		        JList list_2 = (JList)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            int index = list_2.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+		soudsListModel = new DefaultListModel<String>(); 
+		soudsList = new JList<String>(soudsListModel);
+		tuningSoundsList();
 		
-		DefaultListModel listModel_3 = new DefaultListModel(); //Using "add" and "remove" to management the list
-		listModel_3.addElement("Test Film Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		listModel_3.addElement("Test Film Element №2");
-		JList<String> list_3 = new JList(listModel_3);
-		list_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		tabbedPane.addTab("Фильмы", null, list_3, null);
-		list_3.setModel(listModel_3);
-		list_3.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent event) {
-		        JList list_3 = (JList)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            int index = list_3.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+		videoListModel = new DefaultListModel<String>(); 
+		videoList = new JList<String>(videoListModel);
+		tuningVideoList();
 		
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setToolTipText("");
-		scrollPane_4.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_4.setBounds(385, 116, 611, 592);
-		contentPane.add(scrollPane_4);
+		scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("");
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(385, 116, 611, 592);
+		contentPane.add(scrollPane);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setFont(new Font("Monospaced", Font.PLAIN, 80));
-		textArea.setText("Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!");
-		textArea.setCaretPosition(textArea.getLineStartOffset(textArea.getLineCount() - 1));
-		scrollPane_4.setViewportView(textArea);
+		informationArea = new JTextArea();
+		informationArea.setEditable(false);
+		informationArea.setLineWrap(true);
+		informationArea.setFont(new Font("Monospaced", Font.PLAIN, 80));
+		informationArea.setText("Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!Test!");
+		informationArea.setCaretPosition(informationArea.getLineStartOffset(informationArea.getLineCount() - 1));
+		scrollPane.setViewportView(informationArea);
 		
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
+	
+	private void tuningDocumentsList() {
+		documentsListModel.addElement("Test Document Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		documentsListModel.addElement("Test Document Element №2");
+		documentsList.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tabbedPane.addTab("Документы", null, documentsList, null);
+		documentsList.setModel(documentsListModel);
+		documentsList.addMouseListener(new MouseAdapter() {
+		    @SuppressWarnings("unchecked")
+			public void mouseClicked(MouseEvent event) {
+		        JList<String> documentsList = (JList<String>)event.getSource();
+		        if (event.getClickCount() == 2) {
+		            //int index = documentsList.locationToIndex(event.getPoint());
+		        } 
+		    }
+		});
+	}
+	
+	private void tuningBooksList() {
+		booksListModel.addElement("Test Book Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		booksListModel.addElement("Test Book Element №2");
+		booksList.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tabbedPane.addTab("Книги", null, booksList, null);
+		booksList.setModel(booksListModel);
+		booksList.addMouseListener(new MouseAdapter() {
+		    @SuppressWarnings("unchecked")
+			public void mouseClicked(MouseEvent event) {
+		        JList<String> booksList = (JList<String>)event.getSource();
+		        if (event.getClickCount() == 2) {
+		            //int index = booksList.locationToIndex(event.getPoint());
+		        } 
+		    }
+		});
+	}
+	
+	private void tuningSoundsList() {
+		soudsListModel.addElement("Test Sound Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		soudsListModel.addElement("Test Sound Element №2");	
+		soudsList.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tabbedPane.addTab("Аудио", null, soudsList, null);
+		soudsList.setModel(soudsListModel);
+		soudsList.addMouseListener(new MouseAdapter() {
+		    @SuppressWarnings("unchecked")
+			public void mouseClicked(MouseEvent event) {
+		        JList<String> soudsList = (JList<String>)event.getSource();
+		        if (event.getClickCount() == 2) {
+		            //int index = soudsList.locationToIndex(event.getPoint());
+		        } 
+		    }
+		});	
+	}
+	
+	private void tuningVideoList() {	
+		videoListModel.addElement("Test Film Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		videoListModel.addElement("Test Film Element №2");
+		videoList.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		tabbedPane.addTab("Видео", null, videoList, null);
+		videoList.setModel(videoListModel);
+		videoList.addMouseListener(new MouseAdapter() {
+		    @SuppressWarnings("unchecked")
+			public void mouseClicked(MouseEvent event) {
+		        JList<String> videoList = (JList<String>)event.getSource();
+		        if (event.getClickCount() == 2) {
+		            //int index = videoList.locationToIndex(event.getPoint());
+		        } 
+		    }
+		});
 	}
 }
