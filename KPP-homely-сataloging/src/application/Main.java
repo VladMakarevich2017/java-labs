@@ -1,3 +1,4 @@
+package application;
 import javax.swing.text.BadLocationException;
 
 import GUI.AdminLoginFrame;

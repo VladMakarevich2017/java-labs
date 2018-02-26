@@ -64,9 +64,7 @@ public class LoginFrame extends JFrame {
 		tuningPasswordField();				
 		entryButton = new JButton("Войти");
 		entryButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
+			public void actionPerformed(ActionEvent arg0){}
 		});
 		tuningEntryButton();
 		guestEntryButton = new JButton("Войти как гость");
