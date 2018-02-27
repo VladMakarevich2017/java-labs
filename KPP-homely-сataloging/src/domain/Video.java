@@ -1,5 +1,5 @@
 package domain;
 
-public class Video {
+public class Video extends Information {
 
 }

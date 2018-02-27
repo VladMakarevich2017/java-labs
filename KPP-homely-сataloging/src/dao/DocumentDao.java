@@ -1,23 +1,38 @@
 package dao;
 
-import java.util.List;
-
 import domain.Document;
+import file.AbstractJDBCDao;
+import file.FileConnection;
 
-/** Объект для управления персистентным состоянием объекта Document */
-public interface DocumentDao {
-	/** Создает новую запись и соответствующий ей объект */
-	public Document create();
+public class DocumentDao extends AbstractJDBCDao<Document, Integer> {
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Document read(int key);
+	public DocumentDao(FileConnection connection) {
+		super(connection);
+		// TODO Auto-generated constructor stub
+	}
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(Document group);
+	@Override
+	public String getSelectQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(Document group);
+	@Override
+	public String getCreateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<Document> getAll();
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,5 +1,5 @@
 package domain;
 
-public class Document {
+public class Document extends Information {
 
 }

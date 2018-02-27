@@ -1,23 +1,38 @@
 package dao;
 
-import java.util.List;
-
 import domain.Audio;
+import file.AbstractJDBCDao;
+import file.FileConnection;
 
-/** Объект для управления персистентным состоянием объекта Audio */
-public interface AudioDao {
-	/** Создает новую запись и соответствующий ей объект */
-	public Audio create();
+public class AudioDao extends AbstractJDBCDao<Audio, Integer> {
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Audio read(int key);
+	public AudioDao(FileConnection connection) {
+		super(connection);
+		// TODO Auto-generated constructor stub
+	}
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(Audio group);
+	@Override
+	public String getSelectQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(Audio group);
+	@Override
+	public String getCreateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<Audio> getAll();
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

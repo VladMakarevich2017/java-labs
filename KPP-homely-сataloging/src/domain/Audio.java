@@ -1,5 +1,5 @@
 package domain;
 
-public class Audio {
+public class Audio extends Information {
 
 }

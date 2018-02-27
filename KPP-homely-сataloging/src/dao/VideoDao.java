@@ -1,23 +1,38 @@
 package dao;
 
-import java.util.List;
-
 import domain.Video;
+import file.AbstractJDBCDao;
+import file.FileConnection;
 
-/** Объект для управления персистентным состоянием объекта Video */
-public interface VideoDao {
-	/** Создает новую запись и соответствующий ей объект */
-	public Video create();
+public class VideoDao extends AbstractJDBCDao<Video, Integer> {
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Video read(int key);
+	public VideoDao(FileConnection connection) {
+		super(connection);
+		// TODO Auto-generated constructor stub
+	}
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(Video group);
+	@Override
+	public String getSelectQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(Video group);
+	@Override
+	public String getCreateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<Video> getAll();
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

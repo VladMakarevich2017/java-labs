@@ -1,23 +1,38 @@
 package dao;
 
-import java.util.List;
-
 import domain.Book;
+import file.AbstractJDBCDao;
+import file.FileConnection;
 
-/** Объект для управления персистентным состоянием объекта Book */
-public interface BookDao {
-	/** Создает новую запись и соответствующий ей объект */
-	public Book create();
+public class BookDao extends AbstractJDBCDao<Book, Integer> {
 
-    /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Book read(int key);
+	public BookDao(FileConnection connection) {
+		super(connection);
+		// TODO Auto-generated constructor stub
+	}
 
-    /** Сохраняет состояние объекта group в базе данных */
-    public void update(Book group);
+	@Override
+	public String getSelectQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Удаляет запись об объекте из базы данных */
-    public void delete(Book group);
+	@Override
+	public String getCreateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /** Возвращает список объектов соответствующих всем записям в базе данных */
-    public List<Book> getAll();
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
