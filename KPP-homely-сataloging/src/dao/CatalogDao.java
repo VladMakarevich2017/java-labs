@@ -6,7 +6,7 @@ import domain.Catalog;
 
 public interface CatalogDao {
 	/** Создает новую запись и соответствующий ей объект */
-    public Catalog create();
+    public Catalog create(String name);
 
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
     public Catalog read(int key);

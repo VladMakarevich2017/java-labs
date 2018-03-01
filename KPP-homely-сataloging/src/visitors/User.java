@@ -1,5 +1,5 @@
 package visitors;
 
-public class User extends Guest {
+public class User extends Guest{
 	
 }

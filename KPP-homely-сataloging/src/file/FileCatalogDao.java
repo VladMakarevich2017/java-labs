@@ -7,13 +7,14 @@ import domain.Catalog;
 
 public class FileCatalogDao implements CatalogDao {
 	private final FileConnection connection;
+	private final String catalogPath = "config/catalogs/";
 	
 	public FileCatalogDao(FileConnection connection) {
         this.connection = connection;
     }
 
 	@Override
-    public Catalog create() {
+    public Catalog create(String name) {
         return null;
     }
 

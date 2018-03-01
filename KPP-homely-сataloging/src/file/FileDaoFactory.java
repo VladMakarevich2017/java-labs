@@ -19,14 +19,13 @@ public class FileDaoFactory implements DaoFactory{
 	
 	@Override
 	public FileConnection getConnection() {
-		// TODO Auto-generated method stub
+//	       return DriverManager.getConnection(url, user, password);
 		return null;
 	}
 
 	@Override
 	public CatalogDao getCatalogDao(FileConnection connection) {
-		// TODO Auto-generated method stub
-		return null;
+        return new FileCatalogDao(connection);
 	}
 
 }
