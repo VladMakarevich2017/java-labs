@@ -10,6 +10,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Component;
@@ -27,6 +29,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
@@ -40,19 +44,10 @@ public class MenuFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textSearchField;
 	private JMenuBar mainMenuBar;
-	private JMenu filesManagementMenu;
-	private JMenuItem menuItemForAdding;
+	private JMenu catalogManagementMenu;
 	private JMenuItem menuItemForOpenning;
 	private JMenuItem menuItemForSaving;
-	private JMenu filterMenu;
-	private JMenuItem filterSettingMenuItem;
-	private JCheckBox filterSwitchMenuItem;
 	private JMenuBar informationManagementMenu;
-	private JMenu menuAddingInformation;
-	private JMenuItem documentsMenuItem;
-	private JMenuItem booksMenuItem;
-	private JMenuItem soundsMenuItem;
-	private JMenuItem videoMenuItem;
 	private JTabbedPane tabbedPane;
 	private DefaultListModel<String> documentsListModel;
 	private JList<String> documentsList;
@@ -68,6 +63,7 @@ public class MenuFrame extends JFrame {
 	private JButton exitButton;
 	private JLabel loginLabel;
 	private Component rigidArea_3;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -101,51 +97,27 @@ public class MenuFrame extends JFrame {
 		mainMenuBar = new JMenuBar();
 		mainMenuBar.setBounds(5, 5, 996, 26);
 		
-		filesManagementMenu = new JMenu("Файл");
-		filesManagementMenu.setPreferredSize(new Dimension(70, 24));
-		mainMenuBar.add(filesManagementMenu);
-		
-		menuItemForAdding = new JMenuItem("Добавить");
-		menuItemForAdding.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		filesManagementMenu.add(menuItemForAdding);
+		catalogManagementMenu = new JMenu("Каталог");
+		catalogManagementMenu.setPreferredSize(new Dimension(70, 24));
+		mainMenuBar.add(catalogManagementMenu);
 		
 		menuItemForOpenning = new JMenuItem("Открыть");
 		menuItemForOpenning.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				createFileChooser();
 			}
 		});
-		filesManagementMenu.add(menuItemForOpenning);
+		catalogManagementMenu.add(menuItemForOpenning);
 		
 		menuItemForSaving = new JMenuItem("Сохранить");
 		menuItemForSaving.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		filesManagementMenu.add(menuItemForSaving);
-		
-		filterMenu = new JMenu("Фильтры");
-		filterMenu.setPreferredSize(new Dimension(70, 24));
-		mainMenuBar.add(filterMenu);
-		
-		filterSettingMenuItem = new JMenuItem("Настроить фильтр");
-		filterSettingMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		filterMenu.add(filterSettingMenuItem);
-		
-		filterSwitchMenuItem = new JCheckBox("Включить фильтр");
-		filterSwitchMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		filterMenu.add(filterSwitchMenuItem);
+		catalogManagementMenu.add(menuItemForSaving);
 		contentPane.add(mainMenuBar);
 		
-		Component rigidArea_2 = Box.createRigidArea(new Dimension(804, 20));
+		Component rigidArea_2 = Box.createRigidArea(new Dimension(872, 20));
 		mainMenuBar.add(rigidArea_2);
 		
 		loginLabel = new JLabel("");
@@ -170,38 +142,17 @@ public class MenuFrame extends JFrame {
 		informationManagementMenu = new JMenuBar();
 		informationManagementMenu.setBounds(5, 33, 991, 48);
 		contentPane.add(informationManagementMenu);
-		
-		menuAddingInformation = new JMenu("Добавить");
 		tuningMenuAddingInformation();
-		informationManagementMenu.add(menuAddingInformation);
 		
-		documentsMenuItem = new JMenuItem("Документы");
-		documentsMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton = new JButton("Добавить");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createFileChooser();
 			}
 		});
-		menuAddingInformation.add(documentsMenuItem);
-		
-		booksMenuItem = new JMenuItem("Книги");
-		booksMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		menuAddingInformation.add(booksMenuItem);
-		
-		soundsMenuItem = new JMenuItem("Аудио");
-		soundsMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		menuAddingInformation.add(soundsMenuItem);
-		
-		videoMenuItem = new JMenuItem("Видео");
-		videoMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		menuAddingInformation.add(videoMenuItem);
+		btnNewButton.setMaximumSize(new Dimension(200, 50));
+		informationManagementMenu.add(btnNewButton);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(483, 20));
 		informationManagementMenu.add(rigidArea);
@@ -261,14 +212,19 @@ public class MenuFrame extends JFrame {
 		
 	}
 	
+	private File createFileChooser() {
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new java.io.File("C:/Users/user/Desktop"));
+		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		int ret = fc.showDialog(null, "Выбор файла");
+		if(ret == JFileChooser.APPROVE_OPTION) {
+			return fc.getSelectedFile();
+		} else {
+			return null;
+		}
+	}
+	
 	private void tuningMenuAddingInformation() {
-		menuAddingInformation.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		menuAddingInformation.setBorderPainted(true);
-		menuAddingInformation.setBackground(Color.DARK_GRAY);
-		menuAddingInformation.setHorizontalTextPosition(SwingConstants.CENTER);
-		menuAddingInformation.setHorizontalAlignment(SwingConstants.CENTER);
-		menuAddingInformation.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		menuAddingInformation.setPreferredSize(new Dimension(200, 24));
 	}
 	
 	private void tuningDocumentsList() {
