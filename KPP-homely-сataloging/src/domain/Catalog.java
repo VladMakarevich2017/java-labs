@@ -1,20 +1,22 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Vector;
 
 @SuppressWarnings("serial")
 public class Catalog implements Serializable{
-	private ArrayList<Document> documents;
-	private ArrayList<Book> books;
-	private ArrayList<Audio> audio;
-	private ArrayList<Video> video;
+	private Vector<Document> documents;
+	private Vector<Book> books;
+	private Vector<Audio> audio;
+	private Vector<Video> video;
+	private String name;
 	
-	public Catalog() {
-		documents = new ArrayList<Document>();
-		books = new ArrayList<Book>();
-		audio = new ArrayList<Audio>();
-		video = new ArrayList<Video>();
+	public Catalog(String name) {
+		documents = new Vector<Document>();
+		books = new Vector<Book>();
+		audio = new Vector<Audio>();
+		video = new Vector<Video>();
+		this.name = name;
 	}
 	
 	public void addDocument(Document document) {
@@ -33,35 +35,35 @@ public class Catalog implements Serializable{
 		this.video.add(video);
 	}
 	
-	public ArrayList<Document> getDocuments() {
+	public Vector<Document> getDocuments() {
 		return documents;
 	}
 	
-	public void setDocuments(ArrayList<Document> documents) {
+	public void setDocuments(Vector<Document> documents) {
 		this.documents = documents;
 	}
 	
-	public ArrayList<Book> getBooks() {
+	public Vector<Book> getBooks() {
 		return books;
 	}
 	
-	public void setBooks(ArrayList<Book> books) {
+	public void setBooks(Vector<Book> books) {
 		this.books = books;
 	}
 	
-	public ArrayList<Audio> getAudio() {
+	public Vector<Audio> getAudio() {
 		return audio;
 	}
 	
-	public void setAudio(ArrayList<Audio> audio) {
+	public void setAudio(Vector<Audio> audio) {
 		this.audio = audio;
 	}
 	
-	public ArrayList<Video> getVideo() {
+	public Vector<Video> getVideo() {
 		return video;
 	}
 	
-	public void setVideo(ArrayList<Video> video) {
+	public void setVideo(Vector<Video> video) {
 		this.video = video;
 	}
 }

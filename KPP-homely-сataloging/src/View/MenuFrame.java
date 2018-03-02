@@ -1,4 +1,4 @@
-package GUI;
+package View;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -23,6 +23,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.BadLocationException;
+
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JPopupMenu;
@@ -63,7 +64,7 @@ public class MenuFrame extends JFrame {
 	private JButton exitButton;
 	private JLabel loginLabel;
 	private Component rigidArea_3;
-	private JButton btnNewButton;
+	private JButton addButton;
 
 	/**
 	 * Launch the application.
@@ -102,18 +103,9 @@ public class MenuFrame extends JFrame {
 		mainMenuBar.add(catalogManagementMenu);
 		
 		menuItemForOpenning = new JMenuItem("Открыть");
-		menuItemForOpenning.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				createFileChooser();
-			}
-		});
 		catalogManagementMenu.add(menuItemForOpenning);
 		
 		menuItemForSaving = new JMenuItem("Сохранить");
-		menuItemForSaving.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		catalogManagementMenu.add(menuItemForSaving);
 		contentPane.add(mainMenuBar);
 		
@@ -128,31 +120,17 @@ public class MenuFrame extends JFrame {
 		mainMenuBar.add(rigidArea_3);
 		
 		exitButton = new JButton("Выход");
-		exitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
-				LoginFrame login = new LoginFrame();
-				login.run();
-			}
-		});
 		exitButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		mainMenuBar.add(exitButton);
 		
 		informationManagementMenu = new JMenuBar();
 		informationManagementMenu.setBounds(5, 33, 991, 48);
 		contentPane.add(informationManagementMenu);
-		tuningMenuAddingInformation();
 		
-		btnNewButton = new JButton("Добавить");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				createFileChooser();
-			}
-		});
-		btnNewButton.setMaximumSize(new Dimension(200, 50));
-		informationManagementMenu.add(btnNewButton);
+		addButton = new JButton("Добавить");
+		addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		addButton.setMaximumSize(new Dimension(200, 50));
+		informationManagementMenu.add(addButton);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(483, 20));
 		informationManagementMenu.add(rigidArea);
@@ -165,11 +143,6 @@ public class MenuFrame extends JFrame {
 		informationManagementMenu.add(rigidArea_1);
 		
 		textSearchField = new JTextField();
-		textSearchField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 		textSearchField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		informationManagementMenu.add(textSearchField);
 		textSearchField.setBorder(UIManager.getBorder("MenuBar.border"));
@@ -212,7 +185,43 @@ public class MenuFrame extends JFrame {
 		
 	}
 	
-	private File createFileChooser() {
+	public void addMenuItemForOpenninListener(ActionListener lis) {
+		menuItemForOpenning.addActionListener(lis);
+	}
+	
+	public void addMenuItemForSavingListener(ActionListener lis) {
+		menuItemForSaving.addActionListener(lis);
+	}
+	
+	public void addExitButtonListener(ActionListener lis) {
+		exitButton.addActionListener(lis);
+	}
+	
+	public void addAddButtonListener(ActionListener lis) {
+		addButton.addActionListener(lis);
+	}
+	
+	public void addTextSearchFieldListener(ActionListener lis) {
+		textSearchField.addActionListener(lis);
+	}
+	
+	public void addDocumentsListListener(MouseAdapter lis) {
+		documentsList.addMouseListener(lis);
+	}
+	
+	public void addBooksListListener(MouseAdapter lis) {
+		booksList.addMouseListener(lis);
+	}
+	
+	public void addSoundsListListener(MouseAdapter lis) {
+		soudsList.addMouseListener(lis);
+	}
+	
+	public void addVideoListListener(MouseAdapter lis) {
+		videoList.addMouseListener(lis);
+	}
+	
+	public File createFileChooser() {
 		JFileChooser fc = new JFileChooser();
 		fc.setCurrentDirectory(new java.io.File("C:/Users/user/Desktop"));
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -223,11 +232,8 @@ public class MenuFrame extends JFrame {
 			return null;
 		}
 	}
-	
-	private void tuningMenuAddingInformation() {
-	}
-	
-	private void tuningDocumentsList() {
+
+	public void tuningDocumentsList() {
 		documentsListModel.addElement("Test Document Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		documentsListModel.addElement("Test Document Element №2");
 		documentsList.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -244,54 +250,58 @@ public class MenuFrame extends JFrame {
 		});
 	}
 	
-	private void tuningBooksList() {
+	public void tuningBooksList() {
 		booksListModel.addElement("Test Book Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		booksListModel.addElement("Test Book Element №2");
 		booksList.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tabbedPane.addTab("Книги", null, booksList, null);
 		booksList.setModel(booksListModel);
-		booksList.addMouseListener(new MouseAdapter() {
-		    @SuppressWarnings("unchecked")
-			public void mouseClicked(MouseEvent event) {
-		        JList<String> booksList = (JList<String>)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            //int index = booksList.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+//		booksList.addMouseListener(new MouseAdapter() {
+//		    @SuppressWarnings("unchecked")
+//			public void mouseClicked(MouseEvent event) {
+//		        JList<String> booksList = (JList<String>)event.getSource();
+//		        if (event.getClickCount() == 2) {
+//		            //int index = booksList.locationToIndex(event.getPoint());
+//		        } 
+//		    }
+//		});
 	}
 	
-	private void tuningSoundsList() {
+	public void tuningSoundsList() {
 		soudsListModel.addElement("Test Sound Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		soudsListModel.addElement("Test Sound Element №2");	
 		soudsList.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tabbedPane.addTab("Аудио", null, soudsList, null);
 		soudsList.setModel(soudsListModel);
-		soudsList.addMouseListener(new MouseAdapter() {
-		    @SuppressWarnings("unchecked")
-			public void mouseClicked(MouseEvent event) {
-		        JList<String> soudsList = (JList<String>)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            //int index = soudsList.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});	
+//		soudsList.addMouseListener(new MouseAdapter() {
+//		    @SuppressWarnings("unchecked")
+//			public void mouseClicked(MouseEvent event) {
+//		        JList<String> soudsList = (JList<String>)event.getSource();
+//		        if (event.getClickCount() == 2) {
+//		            //int index = soudsList.locationToIndex(event.getPoint());
+//		        } 
+//		    }
+//		});	
 	}
 	
-	private void tuningVideoList() {	
+	public void tuningVideoList() {	
 		videoListModel.addElement("Test Film Element №1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		videoListModel.addElement("Test Film Element №2");
 		videoList.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tabbedPane.addTab("Видео", null, videoList, null);
 		videoList.setModel(videoListModel);
-		videoList.addMouseListener(new MouseAdapter() {
-		    @SuppressWarnings("unchecked")
-			public void mouseClicked(MouseEvent event) {
-		        JList<String> videoList = (JList<String>)event.getSource();
-		        if (event.getClickCount() == 2) {
-		            //int index = videoList.locationToIndex(event.getPoint());
-		        } 
-		    }
-		});
+//		videoList.addMouseListener(new MouseAdapter() {
+//		    @SuppressWarnings("unchecked")
+//			public void mouseClicked(MouseEvent event) {
+//		        JList<String> videoList = (JList<String>)event.getSource();
+//		        if (event.getClickCount() == 2) {
+//		            //int index = videoList.locationToIndex(event.getPoint());
+//		        } 
+//		    }
+//		});
+	}
+	
+	public JList<String> getDocumentsList() {
+		return documentsList;
 	}
 }

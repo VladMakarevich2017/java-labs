@@ -1,6 +1,6 @@
 package file;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import dao.CatalogDao;
 import domain.Catalog;
@@ -46,7 +46,7 @@ public class FileCatalogDao implements CatalogDao {
     }
 
     @Override
-    public ArrayList<Catalog> getAll() {
+    public Vector<Catalog> getAll() {
 //        String sql = "SELECT * FROM daotalk.Catalog;";
 //        PreparedStatement stm = connection.prepareStatement(sql);
 //        ResultSet rs = stm.executeQuery();
