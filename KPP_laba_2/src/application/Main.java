@@ -2,7 +2,9 @@ package application;
 
 import controller.MainController;
 import model.MainModel;
+import paper.OfficePaper;
 import paper.Paper;
+import paper.PhotoPaper;
 import view.MainFrame;
 
 /**
@@ -19,12 +21,14 @@ public class Main {
 	 * Start the program
 	 */
 	public static void main(String[] args) {
-		MainModel model = new MainModel();
+		OfficePaper officePaper = new OfficePaper();
+		PhotoPaper photoPaper = new PhotoPaper();
+		Printer printer = new Printer();
+		Person person = new Person(printer, officePaper, photoPaper);
+		MainModel model = new MainModel(person, printer);
 		MainFrame frame = new MainFrame(model);
 		MainController controller = new MainController(frame, model);
 		frame.run();
-		Paper paper = new Paper();
-		Person person = new Person(paper);
 	}
 
 }

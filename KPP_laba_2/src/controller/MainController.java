@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import model.MainModel;
 import view.MainFrame;
 
@@ -23,30 +26,29 @@ public class MainController {
 	public MainController(MainFrame frame, MainModel model) {
 		this.frame = frame;
 		this.model = model;
-		//frame.addCalculateListener(new CalculateButtonSelectionAdapter());
+		frame.addPrintListener(new ActionListenerPrintButton());
+		frame.addRefillPaperListener(new ActionListenerRefillPaperButton());
 	}
 	
 	/**
 	 * The processing class of the result button pressing
 	 */
-//	class CalculateButtonSelectionAdapter extends SelectionAdapter{
-//
-//		@Override
-//		public void widgetSelected(SelectionEvent arg0) {
-//			String[] strArray = {frame.massText1.getText(), frame.massText2.getText(), frame.speedText1.getText(), frame.speedText2.getText()};
-//			if(model.isValidation(strArray)) {
-//				int mass1 = Integer.parseInt(frame.massText1.getText());
-//				int mass2 = Integer.parseInt(frame.massText2.getText());
-//				int speed1 = Integer.parseInt(frame.speedText1.getText());
-//				int speed2 = Integer.parseInt(frame.speedText2.getText());
-//				int result = model.calculateResultSpeed(mass1, mass2, speed1, speed2);
-//				frame.resultLabel.setText(Integer.toString(result));
-//			} else {
-//				frame.resultLabel.setText("");
-//			}
-//			frame.resetTextFields();
-//		}
-//
-//    }
+	public class ActionListenerPrintButton implements ActionListener {
+	     public void actionPerformed(ActionEvent e) {
+	    	 if(model.getPrinter().getOfficePaper() != null && model.getPrinter().getPhotoPaper() != null) {
+	    		 model.getPerson().printThis();
+		    	 frame.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
+		    	 frame.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
+		    	 frame.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
+		    	 frame.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
+	    	 }	 
+	     }
+	}
+	
+	public class ActionListenerRefillPaperButton implements ActionListener {
+	     public void actionPerformed(ActionEvent e) {
+	          model.getPerson().refillPaper();
+	     }
+	}
 
 }
