@@ -2,6 +2,7 @@ package application;
 
 import controller.MainController;
 import model.MainModel;
+import paper.Paper;
 import view.MainFrame;
 
 /**
@@ -22,6 +23,8 @@ public class Main {
 		MainFrame frame = new MainFrame(model);
 		MainController controller = new MainController(frame, model);
 		frame.run();
+		Paper paper = new Paper();
+		Person person = new Person(paper);
 	}
 
 }
