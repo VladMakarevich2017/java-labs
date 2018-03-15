@@ -3,6 +3,7 @@ package view;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -13,20 +14,27 @@ import org.eclipse.swt.widgets.Text;
 
 import model.MainModel;
 
+/**
+ * The class that displays the main window 
+ * and all the basic actions take place on this window
+ * @author VladMakarevich
+ *
+ */
+
 public class MainFrame {
 	
 	private MainModel model;
 	private Label massLabel1;
-	private Text massText1;
+	public Text massText1;
 	private Label massLabel2;
-	private Text massText2;
+	public Text massText2;
 	private Label speedLabel1;
-	private Text speedText1;
+	public Text speedText1;
 	private Label speedLabel2;
-	private Text speedText2;
+	public Text speedText2;
 	private Label infoLabel;
 	private Button calculateButton;
-	private Label resultLabel;
+	public Label resultLabel;
 
 	protected Shell shell;
 
@@ -143,11 +151,38 @@ public class MainFrame {
 				resetTextFields();
 			}
 		});
+		
+		Button changeButton = new Button(shell, SWT.PUSH);
+		changeButton.setText("»«Ã≈Õ»“‹ ÷¬≈“!!!");
+		gridData = new GridData();
+		gridData.horizontalAlignment = GridData.FILL;
+		gridData.horizontalSpan = 4;
+		changeButton.setLayoutData(gridData);
+		changeButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent event) {
+				Color myColor = new Color(null, 255, 0, 0);
+				massLabel1.setForeground(myColor);
+				massLabel2.setForeground(myColor);
+				speedLabel1.setForeground(myColor);
+				speedLabel2.setForeground(myColor);
+				infoLabel.setForeground(myColor);
+				resultLabel.setForeground(myColor);
+			}
+		});
 	}
+	
+	/**
+	 * the method adds the processing of the calculation button event
+	 * @param sel - event class
+	 */
 	
 	public void addCalculateListener(SelectionAdapter sel) {
 		calculateButton.addSelectionListener(sel);
 	}
+	
+	/**
+	 * method removes characters from input fields
+	 */
 	
 	public void resetTextFields() {
 		massText1.setText("");
