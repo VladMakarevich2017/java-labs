@@ -31,7 +31,7 @@ public class MainController {
 	}
 	
 	/**
-	 * The processing class of the result button pressing
+	 * The processing class of the result print button pressing
 	 */
 	public class ActionListenerPrintButton implements ActionListener {
 	     public void actionPerformed(ActionEvent e) {
@@ -44,6 +44,10 @@ public class MainController {
 	    	 }	 
 	     }
 	}
+	
+	/**
+	 * The processing class of the result refill paper button pressing
+	 */
 	
 	public class ActionListenerRefillPaperButton implements ActionListener {
 	     public void actionPerformed(ActionEvent e) {
