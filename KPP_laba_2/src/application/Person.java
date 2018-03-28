@@ -41,16 +41,24 @@ public class Person {
 	 * method fills the printer with paper
 	 */
 	
-	public void refillPaper() {
-		printer.setPaper(officePaper, photoPaper);
+	public void refillOfficePaper() {
+		printer.setOfficePaper(officePaper);
 	}
+	
+	public void refillPhotoPaper() {
+		printer.setPhotoPaper(photoPaper);
+	}
+	
 	
 	/**
 	 * method prints text and images on paper
 	 */
 	
-	public void printThis() {
+	public void printText() {
 		printer.printText();
+	}
+	
+	public void printImage() {
 		printer.printImage();
 	}
 

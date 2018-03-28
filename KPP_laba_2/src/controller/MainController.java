@@ -35,13 +35,14 @@ public class MainController {
 	 */
 	public class ActionListenerPrintButton implements ActionListener {
 	     public void actionPerformed(ActionEvent e) {
-	    	 if(model.getPrinter().getOfficePaper() != null && model.getPrinter().getPhotoPaper() != null) {
-	    		 model.getPerson().printThis();
-		    	 frame.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
-		    	 frame.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
-		    	 frame.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
-		    	 frame.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
-	    	 }	 
+	    	 model.getPerson().printText();
+    		 model.getPerson().printImage();
+	    	 frame.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
+	    	 frame.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
+	    	 frame.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
+	    	 frame.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
+	    	 model.getPrinter().setOfficePaper(null);
+	    	 model.getPrinter().setPhotoPaper(null);
 	     }
 	}
 	
@@ -51,7 +52,8 @@ public class MainController {
 	
 	public class ActionListenerRefillPaperButton implements ActionListener {
 	     public void actionPerformed(ActionEvent e) {
-	          model.getPerson().refillPaper();
+	          model.getPerson().refillOfficePaper();
+	          model.getPerson().refillPhotoPaper();
 	     }
 	}
 

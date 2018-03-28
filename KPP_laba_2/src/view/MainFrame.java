@@ -78,10 +78,10 @@ public class MainFrame extends JFrame {
 		widthOfficePaperLabel = new JLabel("Ширина");
 		lengthPhotoPaperLabel = new JLabel("Длина");
 		widthPhotoPaperLabel = new JLabel("Ширина");
-		lengthOfficePaperText = new JTextField("100");
-		widthOfficePaperText = new JTextField("200");
-		lengthPhotoPaperText = new JTextField("150");
-		widthPhotoPaperText = new JTextField("330");
+		lengthOfficePaperText = new JTextField("");
+		widthOfficePaperText = new JTextField("");
+		lengthPhotoPaperText = new JTextField("");
+		widthPhotoPaperText = new JTextField("");
 		
 		getContentPane().add(refillPaperButton, new GridBagConstraints(0, 0 , 2, 1, 0.0, 0.9,
 				GridBagConstraints.CENTER, GridBagConstraints.BOTH,

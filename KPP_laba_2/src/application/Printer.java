@@ -42,8 +42,17 @@ public class Printer {
 	 */
 	
 	public void printText() {
-		officePaper.setLength(70 + rnd.nextInt(30));
-		officePaper.setWidth(10 + rnd.nextInt(50));
+		if(officePaper != null) {
+			officePaper.setLength(70 + rnd.nextInt(30));
+			officePaper.setWidth(10 + rnd.nextInt(50));
+		} else {
+			try {
+				throw new Exception();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
 	}
 	
 	/**
@@ -52,8 +61,17 @@ public class Printer {
 	 */
 	
 	public void printImage() {
-		photoPaper.setLength(70 + rnd.nextInt(30));
-		photoPaper.setWidth(10 + rnd.nextInt(50));
+		if(photoPaper != null) {
+			photoPaper.setLength(70 + rnd.nextInt(30));
+			photoPaper.setWidth(10 + rnd.nextInt(50));
+		} else {
+			try {
+				throw new Exception();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
 	}
 
 	public Paper getPhotoPaper() {
