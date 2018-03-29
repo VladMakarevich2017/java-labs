@@ -1,7 +1,7 @@
 package model;
 
 import application.Person;
-import application.Printer;
+import printer.Printer;
 
 /**
  * The class that is responsible for the logic of the program

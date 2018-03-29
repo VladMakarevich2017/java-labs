@@ -1,5 +1,7 @@
 package paper;
 
+import java.io.IOException;
+
 /**
  * Class describing paper. 
  * Stores information about 
@@ -12,6 +14,7 @@ public class Paper {
 	
 	protected double length;
 	protected double width;
+	protected String content;
 	
 	/**
 	 * default  constructor
@@ -20,6 +23,10 @@ public class Paper {
 	public Paper() {
 		length = 0.;
 		width = 0.;
+		content = "";
+	}
+	
+	public void writeDownContent() throws IOException {
 	}
 	
 	public void setLength(double length) {
@@ -36,6 +43,14 @@ public class Paper {
 	
 	public double getWidth() {
 		return width;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public String getContent() {
+		return content;
 	}
 
 }

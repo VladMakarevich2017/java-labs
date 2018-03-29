@@ -1,6 +1,7 @@
 package application;
 
 import paper.Paper;
+import printer.Printer;
 
 /**
  * A class that describes a person stores links 

@@ -1,4 +1,4 @@
-package application;
+package printer;
 
 import java.util.Random;
 
