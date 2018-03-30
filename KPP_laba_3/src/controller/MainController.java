@@ -38,14 +38,14 @@ public class MainController {
 	public class ActionListenerPrintButton implements EventHandler<MouseEvent> {
 		@Override
 		public void handle(MouseEvent arg0) {
-			model.getPerson().printText();
-   		 	model.getPerson().printImage();
-   		 	frame.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
-   		 	frame.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
-   		 	frame.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
-   		 	frame.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
-   		 	model.getPrinter().setOfficePaper(null);
-   		 	model.getPrinter().setPhotoPaper(null);
+//			model.getPerson().printText();
+//   		 	model.getPerson().printImage();
+//   		 	frame.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
+//   		 	frame.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
+//   		 	frame.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
+//   		 	frame.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
+//   		 	model.getPrinter().setOfficePaper(null);
+//   		 	model.getPrinter().setPhotoPaper(null);
 		}
 	}
 	
@@ -57,8 +57,8 @@ public class MainController {
 
 		@Override
 		public void handle(MouseEvent event) {	
-			model.getPerson().refillOfficePaper();
-	        model.getPerson().refillPhotoPaper();
+//			model.getPerson().refillOfficePaper();
+//	        model.getPerson().refillPhotoPaper();
 		}
 	}
 

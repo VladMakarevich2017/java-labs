@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class OfficePaper extends Paper {
 	public void writeDownContent() throws IOException {
-		FileReader fr = new FileReader("office.txt");
+		FileReader fr = new FileReader("./database/office.txt");
 		Scanner scan = new Scanner(fr);
 		content = scan.nextLine();
 		fr.close();

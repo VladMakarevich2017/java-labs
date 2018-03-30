@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 
 import controller.MainController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -27,10 +29,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.MainModel;
+import paper.DrawingPaper;
 import paper.OfficePaper;
 import paper.Paper;
 import paper.PhotoPaper;
 import printer.Printer;
+import printer.Xerox;
 
 /**
  * The program calculates the final speed 
@@ -79,9 +83,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 	   OfficePaper officePaper = new OfficePaper();
 	   PhotoPaper photoPaper = new PhotoPaper();
+	   DrawingPaper drawingPaper = new DrawingPaper();
 	   Printer printer = new Printer();
+	   Xerox xerox = new Xerox(drawingPaper);
 	   Person person = new Person(printer, officePaper, photoPaper);
-	   MainModel model = new MainModel(person, printer);
+	   MainModel model = new MainModel(person, printer, xerox);
 	   MainController controller = new MainController(this, model);
 	   
 	   GridPane root = new GridPane(); 
@@ -89,22 +95,22 @@ public class Main extends Application {
        root.setHgap(25);
        root.setVgap(15);
         
-       refillPaperButton = new Button("Заправить принтер");
-       printButton = new Button("Печать");
-       scanButton = new Button("Сканировать бумагу");
-       printScanningButton = new Button("Печатать отсканированное");
-       officePaperLabel = new Label("Офисная бумага");
-       photoPaperLabel = new Label("   Фотобумага");
-       drawingPaperLabel = new Label("Бумага для черчения");
-       lengthOfficePaperLabel = new Label("Длина");
-       widthOfficePaperLabel = new Label("Ширина");
-       contentOfficePaperLabel = new Label("Содержание");
-       contentPhotoPaperLabel = new Label("Содержание");
-       contentDrawingPaperLabel = new Label("Содержание");
-       lengthPhotoPaperLabel = new Label("Длина");
-       widthPhotoPaperLabel = new Label("Ширина");
-       lengthDrawingPaperLabel = new Label("Длина");
-       widthDrawingPaperLabel = new Label("Ширина");
+       refillPaperButton = new Button("Р—Р°РїРѕР»РЅРёС‚СЊ Р±СѓРјР°РіРѕР№");
+       printButton = new Button("РџРµС‡Р°С‚СЊ");
+       scanButton = new Button("РЎРєР°РЅРёСЂРѕРІР°С‚СЊ Р±СѓРјР°РіСѓ");
+       printScanningButton = new Button("РџРµС‡Р°С‚СЊ СЃРєР°РЅРёСЂРѕРІР°РЅРЅРѕРіРѕ");
+       officePaperLabel = new Label("РћС„РёСЃРЅР°СЏ Р±СѓРјР°РіР°");
+       photoPaperLabel = new Label("   Р¤РѕС‚РѕР±СѓРјР°РіР°");
+       drawingPaperLabel = new Label("Р‘СѓРјР°РіР° РґР»СЏ С‡РµСЂС‡РµРЅРёСЏ");
+       lengthOfficePaperLabel = new Label("Р”Р»РёРЅР°");
+       widthOfficePaperLabel = new Label("РЁРёСЂРёРЅР°");
+       contentOfficePaperLabel = new Label("РЎРѕРґРµСЂР¶РёРјРѕРµ");
+       contentPhotoPaperLabel = new Label("РЎРѕРґРµСЂР¶РёРјРѕРµ");
+       contentDrawingPaperLabel = new Label("РЎРѕРґРµСЂР¶РёРјРѕРµ");
+       lengthPhotoPaperLabel = new Label("Р”Р»РёРЅР°");
+       widthPhotoPaperLabel = new Label("РЁРёСЂРёРЅР°");
+       lengthDrawingPaperLabel = new Label("Р”Р»РёРЅР°");
+       widthDrawingPaperLabel = new Label("РЁРёСЂРёРЅР°");
        lengthOfficePaperText = new TextField("");
        widthOfficePaperText = new TextField("");
        lengthPhotoPaperText = new TextField("");
@@ -188,6 +194,11 @@ public class Main extends Application {
 
        root.add(drawingContent, 1, 11, 1, 1);
        GridPane.setHalignment(drawingContent, HPos.CENTER);
+       
+       addPrintListener(model);
+       addRefillPaperListener(model);
+       addScanButtonListener(model);
+       addPrintScanningButtonListener(model);
  	 
        Scene scene = new Scene(root, 680, 600);
        primaryStage.setTitle("KPP laba 3 20v");
@@ -196,12 +207,64 @@ public class Main extends Application {
 		
 	}
 	
-	public void addPrintListener(EventHandler<MouseEvent> e) {
-		printButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e);
+	public void addPrintListener(MainModel model) {
+		printButton.setOnAction(event -> {
+			try {
+	   		 	this.lengthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getLength()));
+	   		 	this.widthOfficePaperText.setText(String.valueOf(model.getPrinter().getOfficePaper().getWidth()));
+	   		 	this.officeContent.setText(model.getPrinter().getOfficePaper().getContent());
+	   		 	this.lengthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getLength()));
+	   		 	this.widthPhotoPaperText.setText(String.valueOf(model.getPrinter().getPhotoPaper().getWidth()));
+	   		 	this.photoContent.setText(model.getPrinter().getPhotoPaper().getContent());
+	   		 	model.getPrinter().setOfficePaper(null);
+	   		 	model.getPrinter().setPhotoPaper(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
-	public void addRefillPaperListener(EventHandler<MouseEvent> e) {
-		refillPaperButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e);
+	public void addRefillPaperListener(MainModel model) {
+		refillPaperButton.setOnAction(event -> {
+			try {
+				model.getPerson().refillOfficePaper();
+		        model.getPerson().refillPhotoPaper();
+				model.getPerson().printText();
+				model.getPerson().printImage();		
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+   		 	
+		});
 	}
+	
+	public void addScanButtonListener(MainModel model) {
+		scanButton.setOnAction(event -> {
+			model.getXerox().scanPaper(model.getPrinter().getOfficePaper());
+		});
+	}
+	
+	public void addPrintScanningButtonListener(MainModel model) {
+		printScanningButton.setOnAction(event -> {
+			model.getXerox().getDrawingPaper().setContent(model.getXerox().getBuffer());
+			model.getXerox().getDrawingPaper().setWidth(model.getXerox().getWidth());
+			model.getXerox().getDrawingPaper().setLength(model.getXerox().getLength());
+			if(model.getXerox().getDrawingPaper().getLength() > 0 && model.getXerox().getDrawingPaper().getWidth() > 0 &&
+					model.getXerox().getDrawingPaper().getContent() != "") {
+				this.lengthDrawingPaperText.setText(String.valueOf(model.getXerox().getDrawingPaper().getLength()));
+				this.widthDrawingPaperText.setText(String.valueOf(model.getXerox().getDrawingPaper().getWidth()));
+	   		 	this.drawingContent.setText(model.getXerox().getDrawingPaper().getContent());
+	   		 	model.getXerox().setDrawingPaper(null);
+			} else {
+				try {
+					throw new Exception();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	
 
 }

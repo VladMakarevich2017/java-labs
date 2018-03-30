@@ -1,8 +1,7 @@
 package model;
 
 import application.Person;
-import printer.Printer;
-import printer.Xerox;
+import application.Printer;
 
 /**
  * The class that is responsible for the logic of the program
@@ -14,7 +13,6 @@ public class MainModel {
 	
 	private Person person;
 	private Printer printer;
-	private Xerox xerox;
 	
 	/**
 	 * initialization constructor
@@ -22,10 +20,9 @@ public class MainModel {
 	 * @param printer
 	 */
 	
-	public MainModel(Person person, Printer printer, Xerox xerox) {
+	public MainModel(Person person, Printer printer) {
 		this.person = person;
 		this.printer = printer;
-		this.xerox = xerox;
 	}
 	
 	/**
@@ -43,14 +40,6 @@ public class MainModel {
 	
 	public Printer getPrinter() {
 		return printer;
-	}
-
-	public Xerox getXerox() {
-		return xerox;
-	}
-
-	public void setXerox(Xerox xerox) {
-		this.xerox = xerox;
 	}
 	
 	

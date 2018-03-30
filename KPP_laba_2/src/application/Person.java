@@ -1,9 +1,6 @@
 package application;
 
-import java.io.IOException;
-
 import paper.Paper;
-import printer.Printer;
 
 /**
  * A class that describes a person stores links 
@@ -44,25 +41,16 @@ public class Person {
 	 * method fills the printer with paper
 	 */
 	
-	public void refillOfficePaper() {
-		printer.setOfficePaper(officePaper);
+	public void refillPaper() {
+		printer.setPaper(officePaper, photoPaper);
 	}
-	
-	public void refillPhotoPaper() {
-		printer.setPhotoPaper(photoPaper);
-	}
-	
 	
 	/**
 	 * method prints text and images on paper
-	 * @throws IOException 
 	 */
 	
-	public void printText() throws IOException {
+	public void printThis() {
 		printer.printText();
-	}
-	
-	public void printImage() throws IOException {
 		printer.printImage();
 	}
 

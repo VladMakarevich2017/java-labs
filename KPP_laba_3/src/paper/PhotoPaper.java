@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class PhotoPaper extends Paper {
 	public void writeDownContent() throws IOException {
-		FileReader fr = new FileReader("photo.txt");
+		FileReader fr = new FileReader("./database/photo.txt");
 		Scanner scan = new Scanner(fr);
 		content = scan.nextLine();
 		fr.close();

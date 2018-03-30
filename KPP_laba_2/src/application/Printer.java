@@ -1,6 +1,5 @@
-package printer;
+package application;
 
-import java.io.IOException;
 import java.util.Random;
 
 import paper.Paper;
@@ -40,43 +39,21 @@ public class Printer {
 	/**
 	 * The method prints text 
 	 * and changes the paper size
-	 * @throws IOException 
 	 */
 	
-	public void printText() throws IOException {
-		if(officePaper != null) {
-			officePaper.setLength(70 + rnd.nextInt(30));
-			officePaper.setWidth(10 + rnd.nextInt(50));
-			officePaper.writeDownContent();
-		} else {
-			try {
-				throw new Exception();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-		
+	public void printText() {
+		officePaper.setLength(70 + rnd.nextInt(30));
+		officePaper.setWidth(10 + rnd.nextInt(50));
 	}
 	
 	/**
 	 * The method prints image 
 	 * and changes the paper size
-	 * @throws IOException 
 	 */
 	
-	public void printImage() throws IOException {
-		if(photoPaper != null) {
-			photoPaper.setLength(70 + rnd.nextInt(30));
-			photoPaper.setWidth(10 + rnd.nextInt(50));
-			photoPaper.writeDownContent();
-		} else {
-			try {
-				throw new Exception();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-		
+	public void printImage() {
+		photoPaper.setLength(70 + rnd.nextInt(30));
+		photoPaper.setWidth(10 + rnd.nextInt(50));
 	}
 
 	public Paper getPhotoPaper() {
@@ -94,5 +71,9 @@ public class Printer {
 	public void setOfficePaper(Paper officePaper) {
 		this.officePaper = officePaper;
 	}
+	
+	
+	
+	
 
 }
