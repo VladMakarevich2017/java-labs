@@ -1,16 +1,31 @@
 package sort;
 
+/**
+ * class for sorting an array in 
+ * single-threaded way 
+ * and measuring the sorting time
+ * @author VladMakarevich
+ *
+ */
+
 public class SimpleMerger {
 
-    private int[] unsorted, sorted;
+    private int[] unsorted;
+    private int[] sorted;
+    
+    /**
+     * initialization constructor
+     * @param unsorted array
+     */
 
     public SimpleMerger( int[] unsorted ) {
         this.unsorted = unsorted;
     }
 
     /**
-     * Собственно здесь производится разбиение входного массива и запуск рекурсивного алгоритма
+     * method that breaks the input array in a recursive way
      */
+    
     public void sort() {
         int middle;
         int[] left, right;
@@ -26,7 +41,6 @@ public class SimpleMerger {
             System.arraycopy( unsorted, 0, left, 0, middle );
             System.arraycopy( unsorted, middle, right, 0, unsorted.length - middle );
 
-            // Внимание! Опа, рекурсия :)
             SimpleMerger leftSort = new SimpleMerger( left );
             SimpleMerger rightSort = new SimpleMerger( right );
 
@@ -38,11 +52,13 @@ public class SimpleMerger {
     }
 
     /**
-     * Статический метод. Мержит два отсортированных массива
-     * Используется и в многопоточной версии сортировки
+     * static method. Merge two sorted arrays
      */
+    
     public static int[] merge( int[] leftPart, int[] rightPart ) {
-        int cursorLeft = 0, cursorRight = 0, counter = 0;
+        int cursorLeft = 0;
+        int cursorRight = 0;
+        int counter = 0;
         int[] merged = new int[leftPart.length + rightPart.length];
 
         while ( cursorLeft < leftPart.length && cursorRight < rightPart.length ) {

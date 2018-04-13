@@ -1,27 +1,50 @@
 package sort;
 
+/**
+ * class for sorting an array in 
+ * multi-threaded way 
+ * and measuring the sorting time
+ * @author VladMakarevich
+ *
+ */
+
 public class MultiMerger extends Thread {
 
     private int[] unsorted, sorted;
+    private  int maxThreads;
+    
+    /**
+     * initialization constructor
+     * @param unsorted array
+     * @param maxThreads
+     */
 
-    // Ограничиваем максимальное количество запускаемых потоков
-    private static final int MAX_THREADS = 8;
-
+    public MultiMerger(int[] unsorted, int maxThreads) {
+        this.unsorted = unsorted;
+        this.maxThreads = maxThreads;
+    }
+    
+    /**
+     * initialization constructor
+     * @param unsorted array
+     */
 
     public MultiMerger(int[] unsorted) {
         this.unsorted = unsorted;
+        maxThreads = 8;
     }
+    
+    /**
+     * method starts multithreading sorting
+     */
 
     public void run() {
         int middle;
         int[] left, right;
 
         if ( unsorted.length <= 1 ) {
-            // Массив из 1 элемента точно отсортирован :)
             sorted = unsorted;
         } else {
-
-            // Иначе делим массив на левую и правую части
             middle = unsorted.length / 2;
 
             left = new int[middle];
@@ -30,39 +53,63 @@ public class MultiMerger extends Thread {
             System.arraycopy( unsorted, 0, left, 0, middle );
             System.arraycopy( unsorted, middle, right, 0, unsorted.length - middle );
 
-            // Пока не превысили максимальное количество потоков, запускаем рекурсивно новые потоки на 2-х
-            // новых массивах
-            if ( activeCount() < MAX_THREADS ) {
-                MultiMerger leftSort = new MultiMerger( left );
-                MultiMerger rightSort = new MultiMerger( right );
-
-                leftSort.start();
-                rightSort.start();
-
-                // Лепим докучи, как только потоки дождутся друг друга
-                try {
-                    leftSort.join();
-                    rightSort.join();
-
-                    sorted = SimpleMerger.merge( leftSort.getSorted(), rightSort.getSorted() );
-                } catch ( Exception e ) {
-
-                }
-
-            } else {  // Тут уже новых потоков запускать нельзя - запускаем простой синглтредед алгоритм
-                SimpleMerger leftSort = new SimpleMerger( left );
-                SimpleMerger rightSort = new SimpleMerger( right );
-
-                leftSort.sort();
-                rightSort.sort();
-
-                sorted = SimpleMerger.merge( leftSort.getSorted(), rightSort.getSorted() );
+            if ( activeCount() < maxThreads) {
+            	createNewThread(left, right);
+            } else {  
+            	sequentialSorting(left, right);
             }
+        }
+    }
+    
+    /**
+     * method creates a new threads for two arrays
+     * @param left part of the array
+     * @param right part of the array
+     */
+    
+    public void createNewThread(int[] left, int[] right) {
+    	MultiMerger leftSort = new MultiMerger( left );
+        MultiMerger rightSort = new MultiMerger( right );
+
+        leftSort.start();
+        rightSort.start();
+
+        try {
+            leftSort.join();
+            rightSort.join();
+
+            sorted = SimpleMerger.merge( leftSort.getSorted(), rightSort.getSorted() );
+        } catch ( Exception e ) {
 
         }
+    }
+    
+    /**
+     * the method continues to sort 
+     * the unsorted part of the array
+     * @param left
+     * @param right
+     */
+    
+    public void sequentialSorting(int[] left, int[] right) {
+    	SimpleMerger leftSort = new SimpleMerger( left );
+        SimpleMerger rightSort = new SimpleMerger( right );
+
+        leftSort.sort();
+        rightSort.sort();
+
+        sorted = SimpleMerger.merge( leftSort.getSorted(), rightSort.getSorted() );
     }
 
     public int[] getSorted() {
         return sorted;
     }
+
+	public int getMaxThreads() {
+		return maxThreads;
+	}
+
+	public void setMaxThreads(int maxThreads) {
+		this.maxThreads = maxThreads;
+	}
 }

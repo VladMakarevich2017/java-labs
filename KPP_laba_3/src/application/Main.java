@@ -2,11 +2,9 @@ package application;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import controller.MainController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -45,8 +43,7 @@ import printer.Xerox;
  */
 
 public class Main extends Application {
-	
-	public Button refillPaperButton;
+    public Button refillPaperButton;
 	public Button printButton;
 	public Button scanButton;
 	public Button printScanningButton;
@@ -202,6 +199,7 @@ public class Main extends Application {
  	 
        Scene scene = new Scene(root, 680, 600);
        primaryStage.setTitle("KPP laba 3 20v");
+       primaryStage.setResizable(false);
        primaryStage.setScene(scene);
        primaryStage.show();
 		
