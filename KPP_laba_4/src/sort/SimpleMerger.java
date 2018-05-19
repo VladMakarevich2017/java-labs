@@ -47,7 +47,7 @@ public class SimpleMerger {
             leftSort.sort();
             rightSort.sort();
 
-            sorted = merge( leftSort.getSorted(), rightSort.getSorted() );
+            sorted = merge(leftSort.getSorted(), rightSort.getSorted() );
         }
     }
 

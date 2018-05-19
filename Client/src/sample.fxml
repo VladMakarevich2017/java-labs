@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="975.0" prefWidth="1100.0" style="-fx-background-image: url('table1.jpg');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <HBox prefHeight="60.0" prefWidth="1100.0">
+         <children>
+            <ToggleButton fx:id="voiceBtn" mnemonicParsing="false" onMouseClicked="#turnOnOrOffVoice" prefHeight="50.0" prefWidth="86.0" selected="true" text="Звук">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="7.0" top="2.0" />
+               </HBox.margin>
+            </ToggleButton>
+            <Region prefHeight="60.0" prefWidth="205.0" />
+            <TextArea fx:id="info" editable="false" opacity="0.8" prefHeight="32.0" prefWidth="517.0">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></TextArea>
+            <Region prefHeight="60.0" prefWidth="108.0" />
+            <Button mnemonicParsing="false" onMouseClicked="#exit" prefHeight="55.0" prefWidth="178.0" text="Выход">
+               <font>
+                  <Font name="System Italic" size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="7.0" top="2.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="30.0" prefWidth="200.0">
+         <children>
+            <Region prefHeight="30.0" prefWidth="419.0" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Ваши карты" textAlignment="CENTER" wrappingWidth="290.6708984375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox prefHeight="181.0" prefWidth="1100.0">
+         <children>
+            <Region prefHeight="131.0" prefWidth="219.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox9" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player9" strokeType="OUTSIDE" strokeWidth="0.0" text="Player9" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake9" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="12.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate9" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue9" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="291.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="playerFirstCard" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="playerSecondCard" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox1" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player1" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake1" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="0.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate1" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue1" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="173.0" prefWidth="1100.0">
+         <children>
+            <Region prefHeight="173.0" prefWidth="62.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox8" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player8" strokeType="OUTSIDE" strokeWidth="0.0" text="Player8" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake8" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate8" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue8" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="166.0">
+               <children>
+                  <Region prefHeight="54.0" prefWidth="166.0" />
+                  <HBox prefHeight="120.0" prefWidth="200.0">
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="73.6666666666" />
+                        <ImageView fx:id="tableCard1" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="173.0" prefWidth="277.0">
+               <children>
+                  <Region prefHeight="0.0" prefWidth="277.0" />
+                  <HBox opacity="0.5" prefHeight="44.0" prefWidth="277.0" style="-fx-background-color: #2b2a27;">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Банк:">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Region prefHeight="67.0" prefWidth="14.0" />
+                        <Text fx:id="bank" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="157.34375">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="120.0" prefWidth="277.0">
+                     <children>
+                        <ImageView fx:id="tableCard2" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="tableCard3" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="tableCard4" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="174.0" prefWidth="208.0">
+               <children>
+                  <Region prefHeight="54.0" prefWidth="200.0" />
+                  <HBox prefHeight="120.0" prefWidth="200.0" />
+                  <ImageView fx:id="tableCard5" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox2" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player2" strokeType="OUTSIDE" strokeWidth="0.0" text="Player2" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake2" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate2" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue2" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="177.0" prefWidth="1100.0">
+         <children>
+            <Region prefHeight="177.0" prefWidth="55.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox7" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player7" strokeType="OUTSIDE" strokeWidth="0.0" text="Player7" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake7" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate7" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue7" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Region prefHeight="142.0" prefWidth="629.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox3" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player3" strokeType="OUTSIDE" strokeWidth="0.0" text="Player3" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake3" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate3" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue3" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="180.0" prefWidth="1100.0">
+         <children>
+            <Region prefHeight="192.0" prefWidth="213.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox6" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player6" strokeType="OUTSIDE" strokeWidth="0.0" text="Player6" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake6" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate6" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue6" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Region prefHeight="192.0" prefWidth="63.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox5" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player5" strokeType="OUTSIDE" strokeWidth="0.0" text="Player5" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake5" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate5" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue5" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Region prefHeight="192.0" prefWidth="51.0" />
+            <VBox prefHeight="173.0" prefWidth="192.0">
+               <children>
+                  <VBox fx:id="vbox4" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">
+                     <children>
+                        <Text fx:id="player4" strokeType="OUTSIDE" strokeWidth="0.0" text="Player4" textAlignment="CENTER" wrappingWidth="185.6708984375">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="4.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="stake4" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="190.73046875">
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="67.0" prefWidth="192.0">
+                     <children>
+                        <Text fx:id="rate4" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ставка:" wrappingWidth="94.6708984375">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Text fx:id="rateValue4" fill="#15ffc8" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="96.6708984375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="8.0" prefWidth="1100.0" style="-fx-background-color: black;" />
+      <HBox prefHeight="159.0" prefWidth="1100.0" style="-fx-background-color: #514444;">
+         <children>
+            <Region prefHeight="146.0" prefWidth="105.0" />
+            <VBox prefHeight="146.0" prefWidth="289.0">
+               <children>
+                  <Region prefHeight="40.0" prefWidth="381.0" />
+                  <TextField fx:id="rate" prefHeight="65.0" prefWidth="289.0" promptText="Ставка">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <Region prefHeight="146.0" prefWidth="84.0" />
+            <VBox prefHeight="146.0" prefWidth="169.0">
+               <children>
+                  <Region prefHeight="51.0" prefWidth="206.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#check" prefHeight="44.0" prefWidth="169.0" text="Check/Call">
+                     <font>
+                        <Font name="System Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Region prefHeight="146.0" prefWidth="25.0" />
+            <VBox prefHeight="146.0" prefWidth="169.0">
+               <children>
+                  <Region prefHeight="51.0" prefWidth="206.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#raiseMenu" prefHeight="44.0" prefWidth="169.0" text="Raise">
+                     <font>
+                        <Font name="System Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Region prefHeight="146.0" prefWidth="25.0" />
+            <VBox prefHeight="146.0" prefWidth="169.0">
+               <children>
+                  <Region prefHeight="51.0" prefWidth="206.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#foldMenu" prefHeight="44.0" prefWidth="169.0" text="Fold">
+                     <font>
+                        <Font name="System Italic" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
