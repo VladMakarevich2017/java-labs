@@ -17,13 +17,13 @@ import java.util.concurrent.Executors;
 
 import player_info.Player;
 import poker_room.Room;
-import server.MonoThreadClientHandler;
+import server.PokerClientHandler;
 import table_cards.Card;
 import table_cards.CardDeck;
 import table_cards.CardsCombinations;
 
 public class OnlineGame extends Game {
-	private static Vector<MonoThreadClientHandler> clients = new Vector<MonoThreadClientHandler>();
+	private static Vector<PokerClientHandler> clients = new Vector<PokerClientHandler>();
 	private static ExecutorService executeIt = Executors.newFixedThreadPool(10);
     private int port;
 	
@@ -53,7 +53,7 @@ public class OnlineGame extends Game {
                         }
                     }
                 	Socket client = server.accept();
-                    MonoThreadClientHandler tempElem = new MonoThreadClientHandler(client);
+                    PokerClientHandler tempElem = new PokerClientHandler(client);
                     clients.add(tempElem);
                     Player player = new Player(0, stakeSize);
                     players.add(player);
@@ -137,7 +137,7 @@ public class OnlineGame extends Game {
 						currentPosition = searchNextPosition(currentPosition);
 						countOfPlayers--;
 						continue;
-					} else if(players.elementAt(currentPosition).stake.getStakeSize() <= 0) {
+					} else if(players.elementAt(currentPosition).getStake().getStakeSize() <= 0) {
 						currentPosition = searchNextPosition(currentPosition);
 						countOfPlayers--;
 						continue;
@@ -149,14 +149,14 @@ public class OnlineGame extends Game {
 							tempBet = 0;
 							countOfInactivePlayers++;
 						} else {
-							if(tempBet < tempRaise && players.elementAt(currentPosition).stake.getStakeSize() != tempBet) {
+							if(tempBet < tempRaise && players.elementAt(currentPosition).getStake().getStakeSize() != tempBet) {
 								countOfPlayers--;
 								continue;
 							} else if (tempBet > tempRaise) {		
 								getCurrentTable().setCurrentRase(getCurrentTable().getCurrentRase() + tempBet - tempRaise);			
 							} 
 						}	
-					} else if(players.elementAt(currentPosition).stake.getStakeSize() != 0){
+					} else if(players.elementAt(currentPosition).getStake().getStakeSize() != 0){
 						tempBet = Integer.parseInt(clients.elementAt(currentPosition).sendingRequest(RAISE_REQUEST_CODE, 0));
 						if(tempBet == FOLD_REQUES_CODE) {
 							players.elementAt(currentPosition).setFoldFlag(true);
@@ -168,7 +168,7 @@ public class OnlineGame extends Game {
 					}
 					getCurrentTable().setCurrentBank(getCurrentTable().getCurrentBank() + tempBet);
 					players.elementAt(currentPosition).setCurrentBet(players.elementAt(currentPosition).getCurrentBet() + tempBet);
-					players.elementAt(currentPosition).stake.setStakeSize(players.elementAt(currentPosition).stake.getStakeSize() - tempBet);
+					players.elementAt(currentPosition).getStake().setStakeSize(players.elementAt(currentPosition).getStake().getStakeSize() - tempBet);
 					currentPosition = searchNextPosition(currentPosition);
 					if(!checkPlayersRaises() && getCurrentTable().getNumberOfPlayers() - countOfPlayers == 1) countOfPlayers--;
 				}
@@ -189,7 +189,7 @@ public class OnlineGame extends Game {
 	
 	protected void deleteInactivePlayers() {
 		for(int i = 0; i < players.size(); i++) {
-			if (players.elementAt(i).stake.getStakeSize() <= 0) {
+			if (players.elementAt(i).getStake().getStakeSize() <= 0) {
 				if(getCurrentTable().getDealerPosition() == i) {
 					if(i == 0) {
 						getCurrentTable().setDealerPosition(players.size());
@@ -204,11 +204,11 @@ public class OnlineGame extends Game {
 		}
 	}
 	
-	public static Vector<MonoThreadClientHandler> getClients() {
+	public static Vector<PokerClientHandler> getClients() {
 		return clients;
 	}
 
-	public static void setClients(Vector<MonoThreadClientHandler> clients) {
+	public static void setClients(Vector<PokerClientHandler> clients) {
 		OnlineGame.clients = clients;
 	}
 

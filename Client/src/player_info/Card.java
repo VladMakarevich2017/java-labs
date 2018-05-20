@@ -1,4 +1,4 @@
-package application;
+package player_info;
 
 public class Card {
 	private String range;

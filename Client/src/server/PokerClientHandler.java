@@ -9,13 +9,13 @@ import application.Main;
 import player_info.Player;
 import table_cards.Card;
 
-public class MonoThreadClientHandler implements Runnable {
+public class PokerClientHandler implements Runnable {
     private Socket clientDialog;
    	private DataOutputStream out;
 	private DataInputStream in;
 	private String webCamConnectionAdress;
 
-	public MonoThreadClientHandler(Socket client) throws IOException {
+	public PokerClientHandler(Socket client) throws IOException {
         clientDialog = client;
         out = new DataOutputStream(clientDialog.getOutputStream());
         in = new DataInputStream(clientDialog.getInputStream());
@@ -34,7 +34,7 @@ public class MonoThreadClientHandler implements Runnable {
         message += "}" + ",players:[";
         for(int i = 0; i < players.size();i++) {
         	message += "{&:" + i + ";";
-        	message += "stake_size:" + players.elementAt(i).stake.getStakeSize() + ";";
+        	message += "stake_size:" + players.elementAt(i).getStake().getStakeSize() + ";";
         	message += "bet:" + players.elementAt(i).getCurrentBet() + ";";
         	if(!players.elementAt(i).getFoldFlag()) message += "fold:" + "false" + "}; "; 
         	else message += "fold:" + "true" + "}; "; 
@@ -76,7 +76,7 @@ public class MonoThreadClientHandler implements Runnable {
         		return null;
         	}         
         } catch (Exception e) {
-            System.exit(0);
+        	e.printStackTrace();
         } 	
 		return null;
     }

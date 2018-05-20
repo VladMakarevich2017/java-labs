@@ -68,7 +68,7 @@ public class SingleGame extends Game{
 						currentPosition = searchNextPosition(currentPosition);
 						countOfPlayers--;
 						continue;
-					} else if(players.elementAt(currentPosition).stake.getStakeSize() <= 0) {
+					} else if(players.elementAt(currentPosition).getStake().getStakeSize() <= 0) {
 						currentPosition = searchNextPosition(currentPosition);
 						countOfPlayers--;
 						continue;
@@ -83,23 +83,22 @@ public class SingleGame extends Game{
 					    	tempBet = controller.getTempRate();
 						} else {
 							tempBet = Bot.sendingRequest(BET_REQUEST_CODE, tempRaise, getCurrentTable().getCurrentBank(), players.elementAt(currentPosition).getPlayerCards(), 
-									getCurrentTable().getTableCards(), players.elementAt(currentPosition).stake.getStakeSize(), countOfRounds);
+									getCurrentTable().getTableCards(), players.elementAt(currentPosition).getStake().getStakeSize(), countOfRounds);
 						}
 						
 						if(tempBet == FOLD_REQUES_CODE) {
 							players.elementAt(currentPosition).setFoldFlag(true);
 							tempBet = 0;
 							tempCoef++;
-							//countOfPlayers++;
 						} else {
-							if(tempBet < tempRaise && players.elementAt(currentPosition).stake.getStakeSize() != tempBet) {
+							if(tempBet < tempRaise && players.elementAt(currentPosition).getStake().getStakeSize() != tempBet) {
 								countOfPlayers--;
 								continue;
 							} else if (tempBet > tempRaise) {		
 								getCurrentTable().setCurrentRase(getCurrentTable().getCurrentRase() + tempBet - tempRaise);			
 							} 
 						}	
-					} else if(players.elementAt(currentPosition).stake.getStakeSize() != 0){
+					} else if(players.elementAt(currentPosition).getStake().getStakeSize() != 0){
 						if(currentPosition == 0) {
 							controller.playerFirstCard.setOpacity(1);
 							controller.playerSecondCard.setOpacity(1);
@@ -110,13 +109,12 @@ public class SingleGame extends Game{
 					    	tempBet = controller.getTempRate();
 						} else {
 							tempBet = Bot.sendingRequest(RAISE_REQUEST_CODE, 0, getCurrentTable().getCurrentBank(), players.elementAt(currentPosition).getPlayerCards(), 
-									getCurrentTable().getTableCards(), players.elementAt(currentPosition).stake.getStakeSize(), countOfRounds);
+									getCurrentTable().getTableCards(), players.elementAt(currentPosition).getStake().getStakeSize(), countOfRounds);
 						}
 						
 						if(tempBet == FOLD_REQUES_CODE) {
 							players.elementAt(currentPosition).setFoldFlag(true);
 							tempBet = 0;
-							//countOfPlayers++;
 							tempCoef++;
 						} else {
 							getCurrentTable().setCurrentRase(getCurrentTable().getCurrentRase() + tempBet);	
@@ -124,7 +122,7 @@ public class SingleGame extends Game{
 					}
 					getCurrentTable().setCurrentBank(getCurrentTable().getCurrentBank() + tempBet);
 					players.elementAt(currentPosition).setCurrentBet(players.elementAt(currentPosition).getCurrentBet() + tempBet);
-					players.elementAt(currentPosition).stake.setStakeSize(players.elementAt(currentPosition).stake.getStakeSize() - tempBet);
+					players.elementAt(currentPosition).getStake().setStakeSize(players.elementAt(currentPosition).getStake().getStakeSize() - tempBet);
 					currentPosition = searchNextPosition(currentPosition);
 					if(!checkPlayersRaises() && getCurrentTable().getNumberOfPlayers() - countOfPlayers == 1) countOfPlayers--;	
 					
@@ -139,7 +137,7 @@ public class SingleGame extends Game{
 	}
 	
 	private void sendingYourInformation() {
-		selectFunction(0, players.elementAt(0).stake.getStakeSize(), 1, 0, true);
+		selectFunction(0, players.elementAt(0).getStake().getStakeSize(), 1, 0, true);
 		controller.playerFirstCard.setOpacity(1);
 		controller.playerSecondCard.setOpacity(1);
 		controller.tableCard1.setImage(null);
@@ -158,18 +156,18 @@ public class SingleGame extends Game{
     	for(int i = 0; i < players.size(); i++) {
     		if(i == 0) {
     			if(players.elementAt(i).getFoldFlag()) {
-    				selectFunction(i, players.elementAt(i).stake.getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), true);
+    				selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), true);
     			} else {
 			    	controller.playerFirstCard.setOpacity(1);
 					controller.playerSecondCard.setOpacity(1);
-        			selectFunction(i, players.elementAt(i).stake.getStakeSize(), 1, players.elementAt(i).getCurrentBet(), true);
+        			selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 1, players.elementAt(i).getCurrentBet(), true);
     			}
     			continue;
     		}
     		if(players.elementAt(i).getFoldFlag()) {
-        		selectFunction(i, players.elementAt(i).stake.getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), false);
+        		selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), false);
     		} else {
-        		selectFunction(i, players.elementAt(i).stake.getStakeSize(), 1, players.elementAt(i).getCurrentBet(), false);
+        		selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 1, players.elementAt(i).getCurrentBet(), false);
     		}
     	}
     	Image tempImage1 = new Image("/cards/" + players.elementAt(0).getPlayerCards()[0].getRange() + "-" + players.elementAt(0).getPlayerCards()[0].getSuit() + "_thumb" + ".jpg");
@@ -257,7 +255,7 @@ public class SingleGame extends Game{
 	
 	protected void deleteInactivePlayers() {
 		for(int i = 0; i < players.size(); i++) {
-			if (players.elementAt(i).stake.getStakeSize() <= 0) {
+			if (players.elementAt(i).getStake().getStakeSize() <= 0) {
 				if(getCurrentTable().getDealerPosition() == i) {
 					if(i == 0) {
 						getCurrentTable().setDealerPosition(players.size());
@@ -276,7 +274,7 @@ public class SingleGame extends Game{
 	}
 
 	public void setController(Controller controller) {
-		this.controller = controller;
+		SingleGame.controller = controller;
 	}
 	
 }

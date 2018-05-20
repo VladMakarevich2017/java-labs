@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import application.Main;
-import client.TestRunnableClientTester;
+import client.PokerClient;
 import game.OnlineGame;
 import game.SingleGame;
 import javafx.fxml.FXML;
@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import poker_room.Room;
 
 public class ControllerCreateSingleGame implements Initializable{
 	
@@ -36,7 +37,7 @@ public class ControllerCreateSingleGame implements Initializable{
 			if(numberOfBots.getText() != "" && Integer.parseInt(numberOfBots.getText()) > 0 &&
 					stackSize.getText() != "" && Integer.parseInt(stackSize.getText()) > 0) {
 				Controller.onlineGameFlag = false;
-				ExecutorService exec = Executors.newFixedThreadPool(10);
+				ExecutorService exec = Executors.newSingleThreadExecutor();
 				Stage newWindow = new Stage();
 				Group group = new Group();
 				Parent content = FXMLLoader.load(getClass().getResource("../sample.fxml"));
@@ -50,9 +51,7 @@ public class ControllerCreateSingleGame implements Initializable{
 				newWindow.setScene(new Scene(group, 1100, 975));
 				Main.getArg().close();
 				Main.setArg(newWindow);
-		        newWindow.show();
-		        
-			} else {
+		        newWindow.show(); 
 			}
 		} catch (RuntimeException e) {
 		}
@@ -61,10 +60,8 @@ public class ControllerCreateSingleGame implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		numberOfBots.setText("3");
-		stackSize.setText("1200");
-		ExecutorService exec = Executors.newFixedThreadPool(10);
-        exec.shutdown();
+		numberOfBots.setText(String.valueOf(Room.DEFAULT_PLAYERS_NUMBER));
+		stackSize.setText(String.valueOf(Room.DEFAULT_STAKE_SIZE));
 	}
 	
 

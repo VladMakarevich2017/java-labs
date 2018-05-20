@@ -219,7 +219,7 @@ public class CardsCombinations {
 	}
 
 	public static int straightFlush(Vector<Card> cards) {
-		return 0;
+	    return 0;
 	}
 	
 	public static void sortArray(int[] numbers) {

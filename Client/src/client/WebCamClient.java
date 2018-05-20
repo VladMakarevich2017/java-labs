@@ -35,8 +35,8 @@ public class WebCamClient implements Runnable{
         {
     		if(!socket.isConnected()) return;
         	while(!socket.isClosed()) {
-        		if(WebCamManipulation.getCurrentImage() == null || !TestRunnableClientTester.isWebCamFlag()) continue;
-        		String message = TestRunnableClientTester.getPlayerPosition() + ImageManipulation.imageToString(WebCamManipulation.getCurrentImage());
+        		if(WebCamManipulation.getCurrentImage() == null || !PokerClient.isWebCamFlag()) continue;
+        		String message = PokerClient.getPlayerPosition() + ImageManipulation.imageToString(WebCamManipulation.getCurrentImage());
         		out.writeUTF(message);
         	}
             out.writeUTF("quit");

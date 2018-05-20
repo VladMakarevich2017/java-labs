@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import application.Main;
-import client.TestRunnableClientTester;
+import client.PokerClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +35,7 @@ public class ControllerMain implements Initializable{
 	private void createGame() throws IOException {
 		try {
 			if(gamePort.getText() != "" && Integer.parseInt(gamePort.getText()) != 0) {
-				TestRunnableClientTester.setGamePort(Integer.parseInt(gamePort.getText()));
+				PokerClient.setGamePort(Integer.parseInt(gamePort.getText()));
 				Stage newWindow = new Stage();
 				Group group = new Group();
 				Parent content = FXMLLoader.load(getClass().getResource("../sampleCreate.fxml"));
@@ -46,7 +46,6 @@ public class ControllerMain implements Initializable{
 				Main.getArg().close();
 				Main.setArg(newWindow);
 				newWindow.show();
-			} else {
 			}
 		} catch (RuntimeException e) {
 		}
@@ -57,8 +56,8 @@ public class ControllerMain implements Initializable{
 		try {
 			if(gamePort.getText() != "" && Integer.parseInt(gamePort.getText()) != 0) {
 				Controller.onlineGameFlag = true;
-				TestRunnableClientTester.setGamePort(Integer.parseInt(gamePort.getText()));
-				TestRunnableClientTester.setGameIp(gameIp.getText());
+				PokerClient.setGamePort(Integer.parseInt(gamePort.getText()));
+				PokerClient.setGameIp(gameIp.getText());
 				Stage newWindow = new Stage();
 				Group group = new Group();
 				Parent content = FXMLLoader.load(getClass().getResource("../sample.fxml"));
@@ -69,7 +68,6 @@ public class ControllerMain implements Initializable{
 				Main.getArg().close();
 				Main.setArg(newWindow);			
 				newWindow.show();
-			} else {
 			}
 		} catch (RuntimeException e) {
 		} 
@@ -96,10 +94,7 @@ public class ControllerMain implements Initializable{
 	
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		ExecutorService exec = Executors.newFixedThreadPool(10);
-        exec.shutdown();
-	}
+	public void initialize(URL arg0, ResourceBundle arg1) {}
 	
 	@FXML
 	public Button getcreateNewGame() {

@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import application.Main;
-import client.TestRunnableClientTester;
+import client.PokerClient;
 import game.OnlineGame;
 import game.SingleGame;
 import javafx.fxml.FXML;
@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import poker_room.Room;
 import webcam.WebCamManipulation;
 
 public class ControllerCreateGame implements Initializable{
@@ -39,8 +40,8 @@ public class ControllerCreateGame implements Initializable{
 					numberOfPlayers.getText() != "" && Integer.parseInt(numberOfPlayers.getText()) > 1 &&
 					stackSize.getText() != "" && Integer.parseInt(stackSize.getText()) > 0) {
 				Controller.onlineGameFlag = true;
-				TestRunnableClientTester.setGamePort(Integer.parseInt(gamePort.getText()));
-				ExecutorService exec = Executors.newFixedThreadPool(10);
+				PokerClient.setGamePort(Integer.parseInt(gamePort.getText()));
+				ExecutorService exec = Executors.newSingleThreadExecutor();
 				exec.execute(new OnlineGame(Integer.parseInt(numberOfPlayers.getText()), 
 						Integer.parseInt(stackSize.getText()) / 100, Integer.parseInt(stackSize.getText()) / 50,
 						Integer.parseInt(gamePort.getText()), Integer.parseInt(stackSize.getText())));
@@ -64,11 +65,9 @@ public class ControllerCreateGame implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		gamePort.setText(String.valueOf(TestRunnableClientTester.getGamePort()));
-		numberOfPlayers.setText("3");
-		stackSize.setText("1200");
-		ExecutorService exec = Executors.newFixedThreadPool(10);
-        exec.shutdown();
+		gamePort.setText(String.valueOf(PokerClient.getGamePort()));
+		numberOfPlayers.setText(String.valueOf(Room.DEFAULT_PLAYERS_NUMBER));
+		stackSize.setText(String.valueOf(Room.DEFAULT_STAKE_SIZE));
 	}
 	
 

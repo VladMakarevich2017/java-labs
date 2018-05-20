@@ -12,31 +12,33 @@ import java.util.concurrent.Executors;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 
-import application.Card;
 import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import player_info.Card;
 import player_info.Player;
+import server.WebCamServer;
 import webcam.ImageManipulation;
 import webcam.WebCamManipulation;
 
-public class TestRunnableClientTester implements Runnable {
-    static Socket socket;
+public class PokerClient implements Runnable {
+    private static Socket socket;
     private static DataOutputStream out;
     private static DataInputStream in;
-    private int currentBank;
-    private int currentStake;
     private static int playerPosition;
 	private static int tempBet;
-    private Card firstHandCard;
-    private Card secondHandCard;
-    private Vector<Card> cards;
-    private static Vector<Player> players;
-   	private Controller controller;
-    private boolean connectionFlag;
     private static int gamePort;
     private static String gameIp;
     private static boolean webCamFlag = true;
+    private static Vector<Player> players;
+    private int currentBank;
+    private int currentStake;
+    private Card firstHandCard;
+    private Card secondHandCard;
+    private Vector<Card> cards;
+   	private Controller controller;
+    private boolean connectionFlag;
+
     
     public static void writeUTF(String message) {
 		try {
@@ -55,10 +57,6 @@ public class TestRunnableClientTester implements Runnable {
 		}
     }
     
-    public static int getTempBet() {
-    	return tempBet;
-    }
-    
     public static boolean compareBet() {
     	if(players.elementAt(playerPosition).getBet() == tempBet) {
     		return true;
@@ -67,7 +65,7 @@ public class TestRunnableClientTester implements Runnable {
     	}
     }
 
-    public TestRunnableClientTester(Controller tempController) {
+    public PokerClient(Controller tempController) {
         try {
         	controller = tempController;
         	connectionFlag = true;
@@ -96,7 +94,7 @@ public class TestRunnableClientTester implements Runnable {
     	}
         try 
         {
-        	ExecutorService executeIt = Executors.newFixedThreadPool(10);
+        	ExecutorService executeIt = Executors.newFixedThreadPool(2);
         	WebCamServer webCamServer = new WebCamServer();
         	WebCamManipulation webCam = new WebCamManipulation();
         	executeIt.execute(webCamServer);
@@ -115,7 +113,7 @@ public class TestRunnableClientTester implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            System.exit(1);
+        	e.printStackTrace();
         }
     }
     
@@ -165,9 +163,7 @@ public class TestRunnableClientTester implements Runnable {
     	String position = topics[2];
 		playerPosition = Integer.parseInt(position.split("position:")[1]);	
 		selectFunction(playerPosition, 0, 1, 0, true);
-    	if(cards.indexOf(";") == -1) {
-    		return;
-    	}
+    	if(cards.indexOf(";") == -1) return;
     	cards = cards.split("cards:\\{")[1];
     	cards = cards.split("\\}")[0];
     	String[] cardsArray = cards.split(";");
@@ -268,7 +264,10 @@ public class TestRunnableClientTester implements Runnable {
     	setCurrentBank(Integer.parseInt((topics[1].split("bank:"))[1]));
     	parseCards(topics[2]);
     	parsePlayersInfo(topics[3]);
-    	
+    	setPokerRoomInfo();	
+    }
+    
+    private void setPokerRoomInfo() {
     	controller.getbank().setText(String.valueOf(currentBank));
     	if(cards.size() != 0) {
     		for(int i = 0; i < cards.size(); i++) {
@@ -278,32 +277,28 @@ public class TestRunnableClientTester implements Runnable {
     	for(int i = 0; i < players.size(); i++) {
     		if(i == playerPosition) {
     			if(players.elementAt(i).getFoldFlag()) {
-    				selectFunction(i, players.elementAt(i).stake.getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), true);
+    				selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 0.35, players.elementAt(i).getBet(), true);
     			} else {
 			    	controller.playerFirstCard.setOpacity(1);
 					controller.playerSecondCard.setOpacity(1);
-        			selectFunction(i, players.elementAt(i).stake.getStakeSize(), 1, players.elementAt(i).getCurrentBet(), true);
+        			selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 1, players.elementAt(i).getBet(), true);
     			}
     		}
     		if(players.elementAt(i).getFoldFlag()) {
-        		selectFunction(i, players.elementAt(i).stake.getStakeSize(), 0.35, players.elementAt(i).getCurrentBet(), false);
+        		selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 0.35, players.elementAt(i).getBet(), false);
     		} else {
-        		selectFunction(i, players.elementAt(i).stake.getStakeSize(), 1, players.elementAt(i).getCurrentBet(), false);
+        		selectFunction(i, players.elementAt(i).getStake().getStakeSize(), 1, players.elementAt(i).getBet(), false);
     		}
     	}
-    	
     	Image tempImage1 = new Image("/cards/" + firstHandCard.getRange() + "-" + firstHandCard.getSuit() + "_thumb" + ".jpg");
 		controller.playerFirstCard.setImage(tempImage1);
 		Image tempImage2 = new Image("/cards/" + secondHandCard.getRange() + "-" + secondHandCard.getSuit() + "_thumb" + ".jpg");
 		controller.playerSecondCard.setImage(tempImage2);
-		
     	cards.removeAllElements();
     }
     
     private void parseCards(String cards) {
-    	if(cards.indexOf(";") == -1) {
-    		return;
-    	}
+    	if(cards.indexOf(";") == -1) return;
     	cards = cards.split("cards:\\{")[1];
     	cards = cards.split("\\}")[0];
     	String[] cardsArray = cards.split(";");
@@ -329,7 +324,7 @@ public class TestRunnableClientTester implements Runnable {
     	String[] topics = info.split(";");
     	Player tempPlayer = new Player();
     	tempPlayer.setPosition(Integer.parseInt((topics[0].split("&:"))[1]));
-    	tempPlayer.stake.setStakeSize(Integer.parseInt((topics[1].split("stake_size:"))[1]));
+    	tempPlayer.getStake().setStakeSize(Integer.parseInt((topics[1].split("stake_size:"))[1]));
     	tempPlayer.setBet(Integer.parseInt((topics[2].split("bet:"))[1]));
     	tempPlayer.setFoldFlag(Boolean.parseBoolean((topics[3].split("fold:"))[1]));
     	players.add(tempPlayer);
@@ -408,7 +403,7 @@ public class TestRunnableClientTester implements Runnable {
 	}
 
 	public static void setGamePort(int gamePort) {
-		TestRunnableClientTester.gamePort = gamePort;
+		PokerClient.gamePort = gamePort;
 	}
 	
     public static DataOutputStream getOutStream() {
@@ -424,7 +419,7 @@ public class TestRunnableClientTester implements Runnable {
 	}
 
 	public static void setPlayers(Vector<Player> players) {
-		TestRunnableClientTester.players = players;
+		PokerClient.players = players;
 	}
 	
    public static int getPlayerPosition() {
@@ -432,7 +427,7 @@ public class TestRunnableClientTester implements Runnable {
 	}
 
 	public static void setPlayerPosition(int playerPosition) {
-		TestRunnableClientTester.playerPosition = playerPosition;
+		PokerClient.playerPosition = playerPosition;
 	}
 
 	public static String getGameIp() {
@@ -440,7 +435,7 @@ public class TestRunnableClientTester implements Runnable {
 	}
 
 	public static void setGameIp(String gameIp) {
-		TestRunnableClientTester.gameIp = gameIp;
+		PokerClient.gameIp = gameIp;
 	}
 
 	public static boolean isWebCamFlag() {
@@ -448,6 +443,10 @@ public class TestRunnableClientTester implements Runnable {
 	}
 
 	public static void setWebCamFlag(boolean webCamFlag) {
-		TestRunnableClientTester.webCamFlag = webCamFlag;
+		PokerClient.webCamFlag = webCamFlag;
 	}
+	
+    public static int getTempBet() {
+    	return tempBet;
+    }
 }

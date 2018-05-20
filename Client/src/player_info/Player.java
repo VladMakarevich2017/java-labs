@@ -4,7 +4,7 @@ import table_cards.Card;
 
 public class Player {
 	protected int tablePosition;
-	public ChipStake stake;
+	private ChipStake stake;
 	protected int currentBet;
 	protected int combinationRange;
 	protected boolean foldFlag;
@@ -16,7 +16,7 @@ public class Player {
 	public Player() {
 		setPlayerCards(new Card[2]);
 		tablePosition = 0;
-		stake = new ChipStake();
+		setStake(new ChipStake());
 		currentBet = 0;
 		combinationRange = 0;
 		foldFlag = false;
@@ -25,7 +25,7 @@ public class Player {
 	public Player(int tablePosition, int stakeSize) {
 		setPlayerCards(new Card[2]);
 		this.tablePosition = tablePosition;
-		stake = new ChipStake(stakeSize);
+		setStake(new ChipStake(stakeSize));
 		currentBet = 0;
 		combinationRange = 0;
 		foldFlag = false;
@@ -95,5 +95,13 @@ public class Player {
 
 	public void setImageDataString(String imageDataString) {
 		this.imageDataString = imageDataString;
+	}
+
+	public ChipStake getStake() {
+		return stake;
+	}
+
+	public void setStake(ChipStake stake) {
+		this.stake = stake;
 	}
 }

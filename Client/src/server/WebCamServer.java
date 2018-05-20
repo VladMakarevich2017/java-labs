@@ -1,4 +1,4 @@
-package client;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,20 +11,21 @@ import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import server.MonoThreadClientHandler;
+import client.PokerClient;
 import webcam.ImageManipulation;
 
 public class WebCamServer implements Runnable {
 	private String ip;
 	private static int port = generatePort();
-	private Vector<MonoThreadClientHandler> clients;
-	private ExecutorService executeIt = Executors.newFixedThreadPool(10);
+	private Vector<PokerClientHandler> clients;
+	private ExecutorService executeIt;
 	private boolean readyFlag;
 	
 	
 	public WebCamServer() {
 		readyFlag = false;
-		clients = new Vector<MonoThreadClientHandler>();
+		clients = new Vector<PokerClientHandler>();
+		executeIt = Executors.newFixedThreadPool(10);
 	}
 
 	@Override
@@ -32,8 +33,8 @@ public class WebCamServer implements Runnable {
 		try (ServerSocket server = new ServerSocket(port);
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
                 setIp(server.getLocalSocketAddress().toString());
-                while(TestRunnableClientTester.getPlayers().size() == 0) Thread.sleep(10);
-                for(int i = 0; i < TestRunnableClientTester.getPlayers().size() - 1; i++) { 
+                while(PokerClient.getPlayers().size() == 0) Thread.sleep(10);
+                for(int i = 0; i < PokerClient.getPlayers().size() - 1; i++) { 
                 	if (br.ready()) {
                         String serverCommand = br.readLine();
                         if (serverCommand.equalsIgnoreCase("quit")) {
@@ -43,25 +44,35 @@ public class WebCamServer implements Runnable {
                     }
                 	readyFlag = true;
                 	Socket client = server.accept();
-                    MonoThreadClientHandler tempElem = new MonoThreadClientHandler(client);
+                    PokerClientHandler tempElem = new PokerClientHandler(client);
                     clients.add(tempElem);
                     executeIt.execute(tempElem);
                 }
                 executeIt.shutdown();
-                while(clients.size() != 0) {
-                	for(int i = 0; i < clients.size(); i++) {
-                		if(clients.elementAt(i).getClientDialog().isClosed()) closeHandle(i);
-                		String request = clients.elementAt(i).webCamSendingRequest();
-                		char position = request.charAt(0);
-                		StringBuilder sb = new StringBuilder(request);
-                		sb.deleteCharAt(0);
-                		TestRunnableClientTester.getPlayers().elementAt(i).setImageDataString(sb.toString());
-                		ImageManipulation.savingResizingImage(ImageManipulation.stringToBufferedImage(TestRunnableClientTester.getPlayers().elementAt(i).getImageDataString()), 110, 110, "player-image-" + position + ".jpg");
-                	}
-                }
+                readWebCamRequest();
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
+	}
+	
+	public void readWebCamRequest(){
+		try {
+			while(clients.size() != 0) {
+	        	for(int i = 0; i < clients.size(); i++) {
+	        		if(clients.elementAt(i).getClientDialog().isClosed()) closeHandle(i);
+	        		String request = clients.elementAt(i).webCamSendingRequest();
+	        		char position = request.charAt(0);
+	        		StringBuilder sb = new StringBuilder(request);
+	        		sb.deleteCharAt(0);
+	        		PokerClient.getPlayers().elementAt(i).setImageDataString(sb.toString());
+	        		ImageManipulation.savingResizingImage(ImageManipulation.stringToBufferedImage(
+	        				PokerClient.getPlayers().elementAt(i).getImageDataString()), 110, 110, "player-image-" + position + ".jpg");
+	        	}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static int generatePort() {
@@ -108,11 +119,11 @@ public class WebCamServer implements Runnable {
 		clients.removeElementAt(clientNumber);
 	}
 	
-	public Vector<MonoThreadClientHandler> getClients() {
+	public Vector<PokerClientHandler> getClients() {
 		return clients;
 	}
 
-	public void setClients(Vector<MonoThreadClientHandler> clients) {
+	public void setClients(Vector<PokerClientHandler> clients) {
 		this.clients = clients;
 	}
 

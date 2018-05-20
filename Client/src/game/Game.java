@@ -54,7 +54,7 @@ public abstract class Game implements Runnable {
     protected void dividingWinEqually(int maxRange, int countPlayersWithMaxRange) {
 		for(int i = 0; i < players.size(); i++) {
 			if(players.elementAt(i).getCombinationRange() == maxRange) {
-				players.elementAt(i).stake.setStakeSize(players.elementAt(i).stake.getStakeSize() + getCurrentTable().getCurrentBank() / countPlayersWithMaxRange);
+				players.elementAt(i).getStake().setStakeSize(players.elementAt(i).getStake().getStakeSize() + getCurrentTable().getCurrentBank() / countPlayersWithMaxRange);
 			}
 		}
 	}
@@ -106,7 +106,7 @@ public abstract class Game implements Runnable {
 			if (players.elementAt(i).getCurrentBet() > getCurrentTable().getCurrentRase() && !players.elementAt(i).getFoldFlag()) {
 				return false;
 			} else if (players.elementAt(i).getCurrentBet() < getCurrentTable().getCurrentRase() && 
-					players.elementAt(i).stake.getStakeSize() > 0 && !players.elementAt(i).getFoldFlag()) {
+					players.elementAt(i).getStake().getStakeSize() > 0 && !players.elementAt(i).getFoldFlag()) {
 				return false;
 			}
 		}
@@ -115,7 +115,7 @@ public abstract class Game implements Runnable {
 	
 	public boolean checkActivePlayers() {
 		int countActivePlayers = countActivePlayers();
-		if (countActivePlayers < currentRoom.MIN_PLAYERS || countActivePlayers > currentRoom.MAX_PLAYERS) {
+		if (countActivePlayers < Room.MIN_PLAYERS || countActivePlayers > Room.MAX_PLAYERS) {
 			return false;
 		}
 		else {
@@ -126,7 +126,7 @@ public abstract class Game implements Runnable {
 	public int countActivePlayers() {
 		int countActivePlayers = 0;
 		for(int i = 0; i < players.size(); i++) {
-			if (players.elementAt(i).stake.getStakeSize() > 0 && !players.elementAt(i).getFoldFlag()) {
+			if (players.elementAt(i).getStake().getStakeSize() > 0 && !players.elementAt(i).getFoldFlag()) {
 				countActivePlayers++;
 			}
 		}
@@ -136,19 +136,19 @@ public abstract class Game implements Runnable {
 	protected void deleteBlaindOfPlayers() {
 		int smallBlindPosition = searchSmallBlindPosition();
 		int bigBlindPosition = searchBigBlindPosition();
-		int tempStakeSize = players.elementAt(smallBlindPosition).stake.getStakeSize();
+		int tempStakeSize = players.elementAt(smallBlindPosition).getStake().getStakeSize();
 		if(tempStakeSize < getCurrentTable().getValueSmallBlind()) {
-			players.elementAt(smallBlindPosition).stake.setStakeSize(0);
+			players.elementAt(smallBlindPosition).getStake().setStakeSize(0);
 			getCurrentTable().setCurrentBank(getCurrentTable().getCurrentBank() - (getCurrentTable().getValueSmallBlind() - tempStakeSize));
 		} else {
-			players.elementAt(smallBlindPosition).stake.setStakeSize(tempStakeSize - getCurrentTable().getValueSmallBlind());
+			players.elementAt(smallBlindPosition).getStake().setStakeSize(tempStakeSize - getCurrentTable().getValueSmallBlind());
 		}
-		tempStakeSize = players.elementAt(bigBlindPosition).stake.getStakeSize();
+		tempStakeSize = players.elementAt(bigBlindPosition).getStake().getStakeSize();
 		if(tempStakeSize < getCurrentTable().getValueBigBlind()) {
-			players.elementAt(bigBlindPosition).stake.setStakeSize(0);
+			players.elementAt(bigBlindPosition).getStake().setStakeSize(0);
 			getCurrentTable().setCurrentBank(getCurrentTable().getCurrentBank() - (getCurrentTable().getValueBigBlind() - tempStakeSize));
 		} else {
-			players.elementAt(bigBlindPosition).stake.setStakeSize(tempStakeSize - getCurrentTable().getValueBigBlind());
+			players.elementAt(bigBlindPosition).getStake().setStakeSize(tempStakeSize - getCurrentTable().getValueBigBlind());
 		}
 	}
 	

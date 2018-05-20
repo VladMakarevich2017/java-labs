@@ -17,7 +17,7 @@
    <children>
       <HBox prefHeight="60.0" prefWidth="1100.0">
          <children>
-            <ToggleButton fx:id="voiceBtn" mnemonicParsing="false" onMouseClicked="#turnOnOrOffVoice" prefHeight="50.0" prefWidth="86.0" selected="true" text="Звук">
+            <ToggleButton fx:id="webCamBtn" mnemonicParsing="false" onMouseClicked="#turnOnOrOffWebCam" prefHeight="50.0" prefWidth="86.0" selected="true" text="Звук">
                <font>
                   <Font size="23.0" />
                </font>

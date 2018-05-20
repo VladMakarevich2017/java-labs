@@ -22,8 +22,6 @@ public class WebCamManipulation implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public static void closeWebCam() throws Exception {

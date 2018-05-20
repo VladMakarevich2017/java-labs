@@ -1,15 +1,12 @@
 package controller;
 import java.awt.Button;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import application.Main;
-import application.Sound;
-import client.TestRunnableClientTester;
-import client.WebCamImagesDrawer;
+import client.PokerClient;
 import game.SingleGame;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import webcam.WebCamImagesDrawer;
 import webcam.WebCamManipulation;
 
 public class Controller implements Initializable{
@@ -33,7 +31,7 @@ public class Controller implements Initializable{
 	private int tempRate;
 
 	@FXML
-	private ToggleButton voiceBtn;
+	private ToggleButton webCamBtn;
 	@FXML
 	private Text bank;
 	@FXML
@@ -181,10 +179,10 @@ public class Controller implements Initializable{
 				}
 				progressFlag = true;
 			} else {
-				if(TestRunnableClientTester.compareBet() == false) {
-					TestRunnableClientTester.writeUTF(String.valueOf(TestRunnableClientTester.getTempBet()));
+				if(PokerClient.compareBet() == false) {
+					PokerClient.writeUTF(String.valueOf(PokerClient.getTempBet()));
 				} else {
-					TestRunnableClientTester.writeUTF("0");
+					PokerClient.writeUTF("0");
 				}
 			}
 			rate.clear();
@@ -206,7 +204,7 @@ public class Controller implements Initializable{
 				tempRate = tempRaise;
 				progressFlag = true;
 			} else {
-				TestRunnableClientTester.writeUTF(String.valueOf(tempRaise));
+				PokerClient.writeUTF(String.valueOf(tempRaise));
 			}
 			rate.clear();
 			info.clear();
@@ -228,7 +226,7 @@ public class Controller implements Initializable{
 				tempRate = -1;
 				progressFlag = true;
 			} else {
-				TestRunnableClientTester.writeUTF("-1");
+				PokerClient.writeUTF("-1");
 			}
 			rate.clear();
 			info.clear();
@@ -236,17 +234,14 @@ public class Controller implements Initializable{
 		} catch(Exception e) {
 			info.setText("Ставка недоступна. Ошибка подключения");
 		}
-		
 	}
-	
-	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		info.setText("Добро пожаловать.");
 		if(onlineGameFlag) {
-			ExecutorService exec = Executors.newFixedThreadPool(10);
-	        exec.execute(new TestRunnableClientTester(this));
+			ExecutorService exec = Executors.newFixedThreadPool(2);
+	        exec.execute(new PokerClient(this));
 	        exec.execute(new WebCamImagesDrawer(this));
 	        exec.shutdown();
 		} else {
@@ -256,7 +251,7 @@ public class Controller implements Initializable{
 	
 	@FXML
 	public void exit() throws IOException {
-		TestRunnableClientTester.setGamePort(0);
+		PokerClient.setGamePort(0);
 		Stage newWindow = new Stage();
 		WebCamManipulation.closeWebCam();
 		Group group = new Group();
@@ -271,11 +266,11 @@ public class Controller implements Initializable{
 	}
 	
 	@FXML
-	private void turnOnOrOffVoice() {
-		if(voiceBtn.isSelected()) {
-			TestRunnableClientTester.setWebCamFlag(true);
+	private void turnOnOrOffWebCam() {
+		if(webCamBtn.isSelected()) {
+			PokerClient.setWebCamFlag(true);
 		} else {
-			TestRunnableClientTester.setWebCamFlag(false);
+			PokerClient.setWebCamFlag(false);
 		}
 	}
 	
@@ -353,8 +348,8 @@ public class Controller implements Initializable{
 		return info;
 	}
 	@FXML
-	public ToggleButton getvoiceBtn() {
-		return voiceBtn;
+	public ToggleButton getwebCamBtn() {
+		return webCamBtn;
 	}
 	@FXML
 	public Text getbank() {
@@ -389,12 +384,12 @@ public class Controller implements Initializable{
 		this.tempRate = tempRate;
 	}
 	
-	public ToggleButton getVoiceBtn() {
-		return voiceBtn;
+	public ToggleButton getWebCamBtn() {
+		return webCamBtn;
 	}
 
-	public void setVoiceBtn(ToggleButton voiceBtn) {
-		this.voiceBtn = voiceBtn;
+	public void setwebCamBtn(ToggleButton webCamBtn) {
+		this.webCamBtn = webCamBtn;
 	}
 
 	public Text getBank() {
