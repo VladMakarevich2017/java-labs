@@ -151,6 +151,11 @@
                   </HBox>
                </children>
             </VBox>
+            <VBox prefHeight="174.0" prefWidth="110.0">
+               <children>
+                  <VBox fx:id="webCamVBox1" prefHeight="110.0" prefWidth="110.0" style="-fx-background-image: url('image_border.png');" />
+               </children>
+            </VBox>
          </children>
       </HBox>
       <HBox prefHeight="173.0" prefWidth="1100.0">
@@ -235,11 +240,23 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="174.0" prefWidth="208.0">
+            <VBox prefHeight="174.0" prefWidth="210.0">
                <children>
-                  <Region prefHeight="54.0" prefWidth="200.0" />
-                  <HBox prefHeight="120.0" prefWidth="200.0" />
-                  <ImageView fx:id="tableCard5" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                  <HBox prefHeight="183.0" prefWidth="210.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="92.33333333">
+                           <children>
+                              <Region prefHeight="54.0" prefWidth="200.0" />
+                              <ImageView fx:id="tableCard5" fitHeight="120.0" fitWidth="92.33333333" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </VBox>
+                        <Region prefHeight="174.0" prefWidth="6.0" />
+                        <VBox prefHeight="174.0" prefWidth="110.0">
+                           <children>
+                              <VBox fx:id="webCamVBox2" prefHeight="110.0" prefWidth="110.0" style="-fx-background-image: url('image_border.png');" />
+                           </children>
+                        </VBox>
+                     </children></HBox>
                </children>
             </VBox>
             <VBox prefHeight="173.0" prefWidth="192.0">
@@ -323,7 +340,12 @@
                   </HBox>
                </children>
             </VBox>
-            <Region prefHeight="142.0" prefWidth="629.0" />
+            <Region prefHeight="177.0" prefWidth="658.0" />
+            <VBox prefHeight="177.0" prefWidth="165.0">
+               <children>
+                  <VBox fx:id="webCamVBox3" prefHeight="110.0" prefWidth="110.0" style="-fx-background-image: url('image_border.png');" />
+               </children>
+            </VBox>
             <VBox prefHeight="173.0" prefWidth="192.0">
                <children>
                   <VBox fx:id="vbox3" opacity="0.0" prefHeight="99.0" prefWidth="186.0" style="-fx-background-image: url('fg1.png');">

@@ -33,6 +33,16 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="319.0">
                      <children>
+                        <TextField fx:id="gameIp" prefHeight="49.0" prefWidth="221.0" promptText="IP сервера">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <Region prefHeight="20.0" prefWidth="319.0" />
+                  <HBox prefHeight="32.0" prefWidth="319.0">
+                     <children>
                         <TextField fx:id="gamePort" prefHeight="49.0" prefWidth="221.0" promptText="Номер порта">
                            <font>
                               <Font size="20.0" />
@@ -48,6 +58,12 @@
                   </Button>
                   <Region prefHeight="20.0" prefWidth="319.0" />
                   <Button mnemonicParsing="false" onMouseClicked="#connectGame" text="Подключиться к игре">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="20.0" prefWidth="319.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#singleGame" prefHeight="44.0" prefWidth="224.0" text="Одиночная игра">
                      <font>
                         <Font size="20.0" />
                      </font>
